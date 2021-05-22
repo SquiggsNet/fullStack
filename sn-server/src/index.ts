@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import express from 'express';
 // import { createConnection } from 'typeorm';
-// import { createConnection } from 'typeorm';
 // import { FinancialAsset } from './entities/FinancialAsset';
 // import { FinancialExpense } from './entities/FinancialExpense';
 // import { FinancialIncome } from './entities/FinancialIncome';
@@ -12,7 +11,7 @@ import express from 'express';
 // import { User } from './entities/User';
 
 const main = async () => {
-  // await createConnection({
+  // const conn = await createConnection({
   //   type: 'postgres',
   //   database: 'sqn-db',
   //   username: 'postgres',
@@ -30,7 +29,6 @@ const main = async () => {
   //     User,
   //   ]
   // })
-
   // const options = {
   //   username: "squiggs",
   //   email: "squiggs.rafael@gmail.com",
