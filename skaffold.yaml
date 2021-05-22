@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+  - image: squiggsnet/sn-server
+    context: sn-server
+    sync:
+      infer:
+      - '**/*'
+deploy:
+  kubectl:
+    manifests:
+    - ./k8s/*
