@@ -47,3 +47,13 @@ spec:
             configMapKeyRef:
               name: postgres-configmap
               key: POSTGRES_URL 
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: redis-configmap
+              key: REDIS_URL 
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: SESSION_SECRET
