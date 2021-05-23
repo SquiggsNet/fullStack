@@ -4,21 +4,23 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: squiggsnet/sn-user-server
-    context: sn-user-server
-    sync:
-      infer:
-      - '**/*'
-    docker:
-      dockerfile: Dockerfile
+    - image: squiggsnet/sn-user-server
+      context: sn-user-server
+      sync:
+        manual:
+          - src: "sn-user-server/dist/**/*.js"
+            dest: sn-user-server
+            strip: "sn-user-server/dist/"
+      docker:
+        dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
-    - k8s/postgres/postgres-configmap.yaml
-    - k8s/postgres/postgres-secret.yaml
-    - k8s/postgres/postgres-persistent-volume-claim.yaml
-    - k8s/postgres/postgres-deployment.yaml
-    - k8s/postgres/postgres-service.yaml
-    - k8s/postgres/postgres-cron-job.yaml
-    - k8s/sn-user-server/sn-user-server-deployment.yaml
-    - k8s/sn-user-server/sn-user-server-service.yaml
+      - k8s/postgres/postgres-configmap.yaml
+      - k8s/postgres/postgres-secret.yaml
+      - k8s/postgres/postgres-persistent-volume-claim.yaml
+      - k8s/postgres/postgres-deployment.yaml
+      - k8s/postgres/postgres-service.yaml
+      - k8s/postgres/postgres-cron-job.yaml
+      - k8s/sn-user-server/sn-user-server-deployment.yaml
+      - k8s/sn-user-server/sn-user-server-service.yaml
