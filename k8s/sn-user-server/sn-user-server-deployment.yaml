@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sn-user-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-user-server
+  template:
+    metadata:
+      labels:
+        app: sn-user-server
+    spec:
+      containers:
+      - name: sn-user-server
+        image: squiggsnet/sn-user-server
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 750m
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        - containerPort: 4000
+        env:
+        - name: PORT
+          value: "4000"
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: POSTGRES_DB 
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: POSTGRES_URL 
