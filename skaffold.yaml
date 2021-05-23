@@ -22,5 +22,9 @@ deploy:
       - k8s/postgres/postgres-deployment.yaml
       - k8s/postgres/postgres-service.yaml
       - k8s/postgres/postgres-cron-job.yaml
+      - k8s/redis/redis-configmap.yaml
+      - k8s/redis/redis-secret.yaml
+      - k8s/redis/redis-deployment.yaml
+      - k8s/redis/redis-service.yaml
       - k8s/sn-user-server/sn-user-server-deployment.yaml
       - k8s/sn-user-server/sn-user-server-service.yaml
