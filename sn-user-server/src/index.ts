@@ -5,6 +5,9 @@ import { createConnection } from "typeorm";
 import { Post } from "./entities/Post";
 import { Updoot } from "./entities/Updoot";
 import { User } from "./entities/User";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { HelloResolver } from "./resolvers/hello";
 
 const main = async () => {
   const { DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST } =
@@ -22,6 +25,16 @@ const main = async () => {
   });
 
   const app = express();
+
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver],
+      validate: false,
+    }),
+  });
+
+  apolloServer.applyMiddleware({ app });
+
   app.get("/", (_, res) => {
     res.send("hello");
   });
