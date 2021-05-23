@@ -8,7 +8,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { FinancialProfile } from "./FinancialProfile";
 import { Post } from "./Post";
 import { Updoot } from "./Updoot";
 
@@ -31,9 +30,6 @@ export class User extends BaseEntity {
 
   @Column()
   password!: string;
-
-  @OneToMany(() => FinancialProfile, (profile) => profile.user)
-  financialProfiles: FinancialProfile[];
 
   @OneToMany(() => Post, (post) => post.creator)
   posts: Post[];

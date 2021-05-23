@@ -4,8 +4,8 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: squiggsnet/sn-server
-    context: sn-server
+  - image: squiggsnet/sn-user-server
+    context: sn-user-server
     sync:
       infer:
       - '**/*'
@@ -20,4 +20,5 @@ deploy:
     - k8s/postgres/postgres-deployment.yaml
     - k8s/postgres/postgres-service.yaml
     - k8s/postgres/postgres-cron-job.yaml
-    - k8s/sn-server-deployment.yaml
+    - k8s/sn-user-server/sn-user-server-deployment.yaml
+    - k8s/sn-user-server/sn-user-server-service.yaml
