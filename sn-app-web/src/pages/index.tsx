@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
+import { CoinFlip } from "../components/CoinFlip";
 import { EditDeletePostButtons } from "../components/EditDeletePostButtons";
 import { Layout } from "../components/Layout";
 import { UpvoteSection } from "../components/UpvoteSection";
@@ -23,7 +24,7 @@ const Index = () => {
     return (
       <Layout>
         <div>
-          {process.env.NEXT_PUBLIC_SN_USER_API_URL}
+          <CoinFlip />
           <div>{error?.message}</div>
         </div>
       </Layout>
@@ -35,32 +36,35 @@ const Index = () => {
         {!data && loading ? (
           <div>loading...</div>
         ) : (
-          <Stack spacing={8}>
-            {data!.posts.posts.map((p) =>
-              !p ? null : (
-                <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
-                  <UpvoteSection post={p} />
-                  <Box flex={1}>
-                    <NextLink href="/post/[id]" as={`/post/${p.id}`}>
-                      <Link>
-                        <Heading> {p.title}</Heading>
-                      </Link>
-                    </NextLink>
-                    <Text>Posted by {p.creator.username}</Text>
-                    <Flex align="center">
-                      <Text flex={1} mt={4}>
-                        {truncate(p.textSnippet)}
-                      </Text>
-                      <EditDeletePostButtons
-                        id={p.id}
-                        creatorId={p.creator.id}
-                      />
-                    </Flex>
-                  </Box>
-                </Flex>
-              )
-            )}
-          </Stack>
+          <>
+            <CoinFlip />
+            <Stack spacing={8}>
+              {data!.posts.posts.map((p) =>
+                !p ? null : (
+                  <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
+                    <UpvoteSection post={p} />
+                    <Box flex={1}>
+                      <NextLink href="/post/[id]" as={`/post/${p.id}`}>
+                        <Link>
+                          <Heading> {p.title}</Heading>
+                        </Link>
+                      </NextLink>
+                      <Text>Posted by {p.creator.username}</Text>
+                      <Flex align="center">
+                        <Text flex={1} mt={4}>
+                          {truncate(p.textSnippet)}
+                        </Text>
+                        <EditDeletePostButtons
+                          id={p.id}
+                          creatorId={p.creator.id}
+                          />
+                      </Flex>
+                    </Box>
+                  </Flex>
+                )
+                )}
+            </Stack>
+          </>
         )}
         {data && data.posts.hasMore ? (
           <Flex>
