@@ -24,6 +24,7 @@ const Index = () => {
     return (
       <Layout>
         <div>
+          Endpoint: {process.env.NEXT_PUBLIC_SN_USER_API_URL}
           <CoinFlip />
           <div>{error?.message}</div>
         </div>
@@ -35,11 +36,13 @@ const Index = () => {
       <Box overflow="auto">
         {!data && loading ? (
           <>
+            Endpoint: {process.env.NEXT_PUBLIC_SN_USER_API_URL}
             <CoinFlip />
             <div>loading...</div>
           </>
         ) : (
           <>
+            Endpoint: {process.env.NEXT_PUBLIC_SN_USER_API_URL}
             <CoinFlip />
             <Stack spacing={8}>
               {data!.posts.posts.map((p) =>
@@ -60,12 +63,12 @@ const Index = () => {
                         <EditDeletePostButtons
                           id={p.id}
                           creatorId={p.creator.id}
-                          />
+                        />
                       </Flex>
                     </Box>
                   </Flex>
                 )
-                )}
+              )}
             </Stack>
           </>
         )}
