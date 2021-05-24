@@ -34,7 +34,10 @@ const Index = () => {
     <Layout>
       <Box overflow="auto">
         {!data && loading ? (
-          <div>loading...</div>
+          <>
+            <CoinFlip />
+            <div>loading...</div>
+          </>
         ) : (
           <>
             <CoinFlip />
