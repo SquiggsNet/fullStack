@@ -32,8 +32,7 @@ const main = async () => {
         database: DB_DATABASE,
         username: DB_USERNAME,
         password: DB_PASSWORD,
-        logging: true,
-        // synchronize: true,
+        synchronize: true,
         entities: [Post, Upvote, User],
       });
       break;

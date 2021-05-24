@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sn-app-web-deployement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-app-web
+  template:
+    metadata:
+      labels:
+        app: sn-app-web
+    spec:
+      containers:
+      - name: sn-app-web
+        image: squiggsnet/sn-app-web
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 750m
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        - containerPort: 3000
+        env:    
+        - name: NEXT_PUBLIC_SN_USER_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: sn-user-server-configmap
+              key: NEXT_PUBLIC_SN_USER_API_URL 

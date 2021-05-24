@@ -13,6 +13,15 @@ build:
             strip: "sn-user-server/dist/"
       docker:
         dockerfile: Dockerfile
+    - image: squiggsnet/sn-app-web
+      context: sn-app-web
+      sync:
+        manual:
+          - src: "sn-app-web/.next/**/*.js"
+            dest: sn-app-web
+            strip: "sn-app-web/.next/"
+      docker:
+        dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
@@ -26,5 +35,9 @@ deploy:
       - k8s/redis/redis-secret.yaml
       - k8s/redis/redis-deployment.yaml
       - k8s/redis/redis-service.yaml
+      - k8s/sn-user-server/sn-user-server-configmap.yaml
       - k8s/sn-user-server/sn-user-server-deployment.yaml
       - k8s/sn-user-server/sn-user-server-service.yaml
+      - k8s/sn-app-web/sn-app-web-configmap.yaml
+      - k8s/sn-app-web/sn-app-web-deployment.yaml
+      - k8s/sn-app-web/sn-app-web-service.yaml
