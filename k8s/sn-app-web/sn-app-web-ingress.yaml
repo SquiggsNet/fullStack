@@ -5,4 +5,4 @@ metadata:
 spec:
   backend:
     serviceName: sn-app-web-service
-    servicePort: 4000
+    servicePort: 3000
