@@ -41,6 +41,7 @@ deploy:
       - k8s/sn-app-web/sn-app-web-configmap.yaml
       - k8s/sn-app-web/sn-app-web-deployment.yaml
       - k8s/sn-app-web/sn-app-web-service.yaml
+      - k8s/sn-app-web/sn-app-web-ingress.yaml
 profiles:
 - name: gcb
   build:
