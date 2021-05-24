@@ -3,14 +3,14 @@ import "reflect-metadata";
 import express from "express";
 import { createConnection } from "typeorm";
 import { Post } from "./entities/Post";
-import { Updoot } from "./entities/Updoot";
+import { Upvote } from "./entities/Upvote";
 import { User } from "./entities/User";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
-import { createUpdootLoader } from "./utils/createUpdootLoader";
+import { createUpvoteLoader } from "./utils/createUpvoteLoader";
 import { createUserLoader } from "./utils/createUserLoader";
 import Redis from "ioredis";
 import session from "express-session";
@@ -34,7 +34,7 @@ const main = async () => {
         password: DB_PASSWORD,
         logging: true,
         // synchronize: true,
-        entities: [Post, Updoot, User],
+        entities: [Post, Upvote, User],
       });
       break;
     } catch (error) {
@@ -87,7 +87,7 @@ const main = async () => {
       res,
       redis,
       userLoader: createUserLoader(),
-      updootLoader: createUpdootLoader(),
+      upvoteLoader: createUpvoteLoader(),
     }),
   });
 

@@ -16,7 +16,7 @@ import {
 import { MyContext } from "../types";
 import { isAuth } from "../middleware/isAuth";
 import { getConnection } from "typeorm";
-import { Updoot } from "../entities/Updoot";
+import { Upvote } from "../entities/Upvote";
 import { User } from "../entities/User";
 
 @InputType()
@@ -50,16 +50,16 @@ export class PostResolver {
   @FieldResolver(() => Int, { nullable: true })
   async voteStatus(
     @Root() post: Post,
-    @Ctx() { updootLoader, req }: MyContext
+    @Ctx() { upvoteLoader, req }: MyContext
   ) {
     if (!req.session.userId) {
       return null;
     }
-    const updoot = await updootLoader.load({
+    const upvote = await upvoteLoader.load({
       postId: post.id,
       userId: req.session.userId,
     });
-    return updoot ? updoot.value : null;
+    return upvote ? upvote.value : null;
   }
 
   @Mutation(() => Boolean)
@@ -69,17 +69,17 @@ export class PostResolver {
     @Arg("value", () => Int) value: number,
     @Ctx() { req }: MyContext
   ) {
-    const isUpdoot = value !== -1;
-    const realValue = isUpdoot ? 1 : -1;
+    const isUpvote = value !== -1;
+    const realValue = isUpvote ? 1 : -1;
     const { userId } = req.session;
 
-    const updoot = await Updoot.findOne({ where: { postId, userId } });
+    const upvote = await Upvote.findOne({ where: { postId, userId } });
     // New Vote
-    if (!updoot) {
+    if (!upvote) {
       await getConnection().transaction(async (tm) => {
         await tm.query(
           ` 
-          INSERT INTO updoot ("userId", "postId", "value")
+          INSERT INTO upvote ("userId", "postId", "value")
           VALUES ($1, $2, $3)
         `,
           [userId, postId, realValue]
@@ -96,11 +96,11 @@ export class PostResolver {
       });
     }
     // Change Vote
-    if (updoot && updoot.value !== realValue) {
+    if (upvote && upvote.value !== realValue) {
       await getConnection().transaction(async (tm) => {
         await tm.query(
           ` 
-          UPDATE updoot
+          UPDATE upvote
           SET value = $1
           WHERE "postId" = $2 and "userId" =$3
         `,
