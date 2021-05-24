@@ -5,7 +5,7 @@ import { User } from "./User";
 
 @ObjectType()
 @Entity()
-export class Updoot extends BaseEntity {
+export class Upvote extends BaseEntity {
   @Field()
   @Column({ type: "int" })
   value: number;
@@ -15,7 +15,7 @@ export class Updoot extends BaseEntity {
   userId: number;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.updoots)
+  @ManyToOne(() => User, (user) => user.upvotes)
   user: User;
 
   @Field()
@@ -23,7 +23,7 @@ export class Updoot extends BaseEntity {
   postId: number;
 
   @Field(() => Post)
-  @ManyToOne(() => Post, (post) => post.updoots, {
+  @ManyToOne(() => Post, (post) => post.upvotes, {
     onDelete: "CASCADE",
   })
   post: Post;
