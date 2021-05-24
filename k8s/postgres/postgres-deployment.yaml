@@ -40,10 +40,10 @@ spec:
             configMapKeyRef:
               name: postgres-configmap
               key: POSTGRES_DB 
-        volumeMounts:
-        - name: postgres-database-storage
-          mountPath: /var/lib/pgsql/data
-      volumes:
-      - name: postgres-database-storage
-        persistentVolumeClaim:
-          claimName: postgres-pv-claim
+      #   volumeMounts:
+      #   - name: postgres-database-storage
+      #     mountPath: /var/lib/pgsql/data
+      # volumes:
+      # - name: postgres-database-storage
+      #   persistentVolumeClaim:
+      #     claimName: postgres-pv-claim

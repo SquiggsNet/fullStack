@@ -27,10 +27,10 @@ deploy:
     manifests:
       - k8s/postgres/postgres-configmap.yaml
       - k8s/postgres/postgres-secret.yaml
-      - k8s/postgres/postgres-persistent-volume-claim.yaml
+      # - k8s/postgres/postgres-persistent-volume-claim.yaml
       - k8s/postgres/postgres-deployment.yaml
       - k8s/postgres/postgres-service.yaml
-      - k8s/postgres/postgres-cron-job.yaml
+      # - k8s/postgres/postgres-cron-job.yaml
       - k8s/redis/redis-configmap.yaml
       - k8s/redis/redis-secret.yaml
       - k8s/redis/redis-deployment.yaml
