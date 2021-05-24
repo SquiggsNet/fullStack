@@ -8,6 +8,7 @@ spec:
     tier: web
   ports:
   - port: 3000
+    protocol: TCP
     name: sn-app-web
     targetPort: 3000
-  type: LoadBalancer
+  type: NodePort

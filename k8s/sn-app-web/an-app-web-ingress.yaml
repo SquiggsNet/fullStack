@@ -1,0 +1,8 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sn-app-web-ingress
+spec:
+  backend:
+    serviceName: sn-app-web
+    servicePort: 4000
