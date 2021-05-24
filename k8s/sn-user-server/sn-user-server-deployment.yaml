@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sn-user-server
-        image: squiggsnet/sn-user-server
+        image: gcr.io/thesquiggsnet/sn-user-server
         resources:
           requests:
             memory: 128Mi
