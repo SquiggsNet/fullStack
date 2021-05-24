@@ -4,7 +4,7 @@ build:
   tagPolicy:  
     sha256: {}
   artifacts:
-    - image: gcr.io/${PROJECT_ID}/sn-user-server:v1
+    - image: gcr.io/thesquiggsnet/sn-user-server:v1
       context: sn-user-server
       sync:
         manual:
@@ -13,7 +13,7 @@ build:
             strip: "sn-user-server/dist/"
       docker:
         dockerfile: Dockerfile
-    - image: gcr.io/${PROJECT_ID}/sn-app-web:v1
+    - image: gcr.io/thesquiggsnet/sn-app-web:v1
       context: sn-app-web
       sync:
         manual:
