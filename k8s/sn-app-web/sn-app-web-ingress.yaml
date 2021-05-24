@@ -4,5 +4,5 @@ metadata:
   name: sn-app-web-ingress
 spec:
   backend:
-    serviceName: sn-app-web
+    serviceName: sn-app-web-service
     servicePort: 4000
