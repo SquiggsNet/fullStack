@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: sn-app-ingress
   namespace: prod
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
 spec:
   # tls:
   # - hosts:
