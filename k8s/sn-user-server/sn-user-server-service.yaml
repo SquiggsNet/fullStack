@@ -6,9 +6,9 @@ metadata:
     app: sn-user-server
 spec:
   type: NodePort
+  ports:
+  - port: 4000
+    protocol: TCP
+    name: sn-server-port
   selector:
     app: sn-user-server
-  ports:
-    - port: 4000
-      protocol: TCP
-      name: sn-server-port
