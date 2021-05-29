@@ -95,6 +95,10 @@ const main = async () => {
     cors: false,
   });
 
+  app.get("/", function (_, res) {
+    res.send("sq-user-service-api");
+  });
+
   // Sever Started
   const port = process.env.PORT ? parseInt(process.env.PORT) : 4000
   app.listen(port, () => {
