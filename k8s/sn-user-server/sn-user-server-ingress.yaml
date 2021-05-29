@@ -5,4 +5,4 @@ metadata:
 spec:
   backend:
     serviceName: sn-user-server-service
-    servicePort: sn-user-server-port
+    servicePort: sn-server-port

@@ -11,4 +11,4 @@ spec:
   ports:
     - port: 4000
       protocol: TCP
-      name: sn-user-server
+      name: sn-server-port
