@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sn-app-ingress
+  namespace: prod
+spec:
+  # tls:
+  # - hosts:
+  #   - app.squiggs.net
+  #   secretName: squiggsnet-secret-tls
+  backend:
+    serviceName: sn-web-service
+    servicePort: sn-web-port

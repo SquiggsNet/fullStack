@@ -35,10 +35,11 @@ deploy:
       - k8s/redis/redis-deployment.yaml
       - k8s/sn-user-server/sn-user-server-configmap.yaml
       - k8s/sn-user-server/sn-user-server-deployment.yaml
+      - k8s/sn-user-server/sn-user-server-ingress.yaml
       - k8s/sn-app-web/sn-app-web-configmap.yaml
       - k8s/sn-app-web/sn-app-web-deployment.yaml
-      - k8s/sn-app-secret.yaml
-      - k8s/sn-app-ingress.yaml
+      - k8s/sn-app-web/sn-app-web-ingress.yaml
+      # - k8s/sn-app-secret.yaml
 profiles:
 - name: gcb
   build:
