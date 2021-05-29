@@ -2,6 +2,8 @@ import { withApollo as createWithApollo } from "next-apollo";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { PaginatedPosts } from "../generated/graphql";
 
+console.log(`from withApollo: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`);
+
 const client = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_SN_USER_API_URL,
   credentials: "include",
