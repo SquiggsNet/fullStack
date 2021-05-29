@@ -23,7 +23,7 @@ const Index = () => {
     // TODO: improve later
     return (
       <Layout>
-        {console.log(`from withApollo: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`)}
+        {console.log(`from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`)}
         <div>
           <CoinFlip />
           <div>{error?.message}</div>
@@ -37,7 +37,7 @@ const Index = () => {
         {!data && loading ? (
           <>
             {console.log(
-              `from withApollo: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
+              `from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
             )}
             <CoinFlip />
             <div>loading...</div>
@@ -45,7 +45,7 @@ const Index = () => {
         ) : (
           <>
             {console.log(
-              `from withApollo: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
+              `from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
             )}
             <CoinFlip />
             <Stack spacing={8}>
