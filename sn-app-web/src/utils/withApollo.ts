@@ -1,9 +1,9 @@
 import { withApollo as createWithApollo } from "next-apollo";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { PaginatedPosts } from "../generated/graphql";
-// http://localhost:4000/graphql
+
 const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_SN_USER_API_URL as string,
+  uri: process.env.NEXT_PUBLIC_SN_USER_API_URL,
   credentials: "include",
   cache: new InMemoryCache({
     typePolicies: {

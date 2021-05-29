@@ -1,0 +1,8 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sn-user-server-ingress
+spec:
+  backend:
+    serviceName: sn-user-server-service
+    servicePort: sn-user-server-port
