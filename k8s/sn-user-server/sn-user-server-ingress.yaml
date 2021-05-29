@@ -3,11 +3,17 @@ kind: Ingress
 metadata:
   name: user-server-ingress
   namespace: prod
+  annotations:
+    networking.gke.io/managed-certificates: sn-api-certificate
 spec:
-  # tls:
-  # - hosts:
-  #   - app.squiggs.net
-  #   secretName: squiggsnet-secret-tls
   backend:
     serviceName: user-server-service
     servicePort: user-server-prt
+---
+apiVersion: networking.gke.io/v1beta1
+kind: MangedCertificate
+metadata:
+  name: sn-api-certificate
+spec:
+  domains:
+    - sn-api.squiggs.net
