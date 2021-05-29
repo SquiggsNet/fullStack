@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sn-user-server-deployment
+  name: user-server-deployment
+  namespace: prod
   labels:
-    app: sn-user-server
+    app: user-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sn-user-server
+      app: user-server
   template:
     metadata:
       labels:
-        app: sn-user-server
+        app: user-server
     spec:
       containers:
-      - name: sn-user-server
+      - name: user-server
         image: gcr.io/thesquiggsnet/sn-user-server
         resources:
           requests:
@@ -27,42 +28,59 @@ spec:
         ports:
         - containerPort: 4000
         env:
-        - name: PORT
-          value: "4000"
         - name: CORS_ORIGIN
-          value: http://localhost:3000
+          valueFrom:
+            configMapKeyRef:
+              name: sn-web-configmap
+              key: sn_web_cors_url 
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: user-server-configmap
+              key: user_server_port 
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               name: postgres-secret
-              key: POSTGRES_USER
+              key: postgres_user
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: postgres-secret
-              key: POSTGRES_PASSWORD
+              key: postgres_password
         - name: DB_DATABASE
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
-              key: POSTGRES_DB 
+              key: postgres_db 
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
               name: postgres-configmap
-              key: POSTGRES_URL 
+              key: postgres_url 
         - name: REDIS_URL
           valueFrom:
             configMapKeyRef:
               name: redis-configmap
-              key: REDIS_URL 
+              key: redis_url 
         - name: SESSION_SECRET
           valueFrom:
             secretKeyRef:
               name: redis-secret
-              key: SESSION_SECRET
-        # - name: CORS_ORIGIN
-        #   valueFrom:
-        #     configMapKeyRef:
-        #       name: sn-app-web-configmap
-        #       key: WEB_APP_URL 
+              key: session_sercret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-server-service
+  labels:
+    app: user-server
+spec:
+  selector:
+    app: user-server
+  type: NodePort
+  ports:
+  - port: 4000
+    protocol: TCP
+    name: user-server-prt
+    # 34.102.255.171

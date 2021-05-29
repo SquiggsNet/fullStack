@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sn-app-web-deployement
+  name: sn-web-deployement
+  namespace: prod
+  labels:
+    app: sn-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sn-app-web
+      app: sn-web
   template:
     metadata:
       labels:
-        app: sn-app-web
+        app: sn-web
     spec:
       containers:
-      - name: sn-app-web
+      - name: sn-web
         image: gcr.io/thesquiggsnet/sn-app-web
         resources:
           requests:
@@ -24,7 +27,25 @@ spec:
             cpu: "1"
         ports:
         - containerPort: 3000
-          protocol: TCP
         env:    
         - name: NEXT_PUBLIC_SN_USER_API_URL
-          value: http://sn-api.squiggs.net/graphql
+          valueFrom:
+            configMapKeyRef:
+              name: user-server-configmap
+              key: user_server_graphql_url 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sn-web-service
+  labels:
+    app: sn-web
+spec:
+  selector:
+    app: sn-web
+  ports:
+  - port: 3000
+    protocol: TCP
+    name: sn-web-port
+  type: NodePort
+    # 34.117.227.218

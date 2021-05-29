@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-configmap
+  namespace: prod
 data:
-  POSTGRES_DB: sn-user-db
-  POSTGRES_URL: postgres-service
+  postgres_db: sn-user-db
+  postgres_url: postgres-service

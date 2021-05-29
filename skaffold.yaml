@@ -25,24 +25,20 @@ build:
 deploy:
   kubectl:
     manifests:
+      - k8s/postgres/postgres-persistent-volume-claim.yaml
       - k8s/postgres/postgres-configmap.yaml
       - k8s/postgres/postgres-secret.yaml
-      # - k8s/postgres/postgres-persistent-volume-claim.yaml
       - k8s/postgres/postgres-deployment.yaml
-      - k8s/postgres/postgres-service.yaml
       # - k8s/postgres/postgres-cron-job.yaml
       - k8s/redis/redis-configmap.yaml
       - k8s/redis/redis-secret.yaml
       - k8s/redis/redis-deployment.yaml
-      - k8s/redis/redis-service.yaml
       - k8s/sn-user-server/sn-user-server-configmap.yaml
       - k8s/sn-user-server/sn-user-server-deployment.yaml
-      - k8s/sn-user-server/sn-user-server-service.yaml
-      - k8s/sn-user-server/sn-user-server-ingress.yaml
       - k8s/sn-app-web/sn-app-web-configmap.yaml
       - k8s/sn-app-web/sn-app-web-deployment.yaml
-      - k8s/sn-app-web/sn-app-web-service.yaml
-      - k8s/sn-app-web/sn-app-web-ingress.yaml
+      - k8s/sn-app-secret.yaml
+      - k8s/sn-app-ingress.yaml
 profiles:
 - name: gcb
   build:
