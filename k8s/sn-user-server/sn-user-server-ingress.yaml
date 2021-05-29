@@ -10,8 +10,8 @@ spec:
     serviceName: user-server-service
     servicePort: user-server-prt
 ---
-apiVersion: networking.gke.io/v1beta1
-kind: MangedCertificate
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
 metadata:
   name: sn-api-certificate
 spec:
