@@ -70,6 +70,7 @@ const main = async () => {
   console.log(`__prod__ : ${__prod__}`);
   console.log(`COOKIE_NAME : ${COOKIE_NAME}`);
   console.log(`FORGET_PASSWORD_PREFIX : ${FORGET_PASSWORD_PREFIX}`);
+  console.log(`SESSION_SECRET : ${process.env.SESSION_SECRET}`);
   app.use(
     session({
       name: COOKIE_NAME,
