@@ -16,7 +16,7 @@ import Redis from "ioredis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from "cors";
-import { COOKIE_NAME, __prod__ } from "./constants";
+import { COOKIE_NAME, __prod__, FORGET_PASSWORD_PREFIX } from "./constants";
 
 const main = async () => {
   const { DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST } =
@@ -67,6 +67,9 @@ const main = async () => {
   );
 
   // Redis for session authentication
+  console.log(`__prod__ : ${__prod__}`);
+  console.log(`COOKIE_NAME : ${COOKIE_NAME}`);
+  console.log(`FORGET_PASSWORD_PREFIX : ${FORGET_PASSWORD_PREFIX}`);
   app.use(
     session({
       name: COOKIE_NAME,
