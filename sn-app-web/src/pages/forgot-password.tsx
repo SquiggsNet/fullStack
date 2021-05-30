@@ -6,9 +6,10 @@ import { Layout } from "../components/Layout";
 import { useForgotPasswordMutation } from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
 
-export const ForgotPassword: React.FC<{}> = ({}) => {
+export const ForgotPassword: React.FC = ({}) => {
   const [complete, setComplete] = useState(false);
   const [fogotPassword] = useForgotPasswordMutation();
+
   return (
     <Layout variant="small">
       <Formik
@@ -28,6 +29,7 @@ export const ForgotPassword: React.FC<{}> = ({}) => {
                 name="email"
                 placeholder="Email"
                 type="email"
+                isRequired
               />
               <Button
                 mt={4}

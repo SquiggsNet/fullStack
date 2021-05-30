@@ -70,6 +70,7 @@ export class UserResolver {
     }
     const key = FORGET_PASSWORD_PREFIX + token;
     const userId = await redis.get(key);
+    console.log(`forgotpass userId: ${userId}`);
     if (!userId) {
       return {
         errors: [
@@ -110,6 +111,7 @@ export class UserResolver {
       return true;
     }
     const token = v4();
+    console.log(`forgotpass email userId: ${user.id}`);
     await redis.set(
       FORGET_PASSWORD_PREFIX + token,
       user.id,
@@ -158,14 +160,39 @@ export class UserResolver {
       user = result.raw[0];
     } catch (error) {
       if (error.code === "23505") {
-        return {
-          errors: [
-            {
-              field: "username",
-              message: "username already exists",
-            },
-          ],
-        };
+        if (error.detail.includes('username')) {
+          return {
+            errors: [
+              {
+                field: "username",
+                message: "username already exists",
+              }
+            ],
+          };
+        }
+        else if (error.detail.includes("email")) {
+          return {
+            errors: [
+              {
+                field: "email",
+                message: "email already exists",
+              },
+            ],
+          };
+        } else {
+          return {
+            errors: [
+              {
+                field: "username",
+                message: "username or email already exists",
+              },
+              {
+                field: "email",
+                message: "username or email already exists",
+              },
+            ],
+          };
+        }
       }
     }
 
@@ -186,7 +213,6 @@ export class UserResolver {
     });
 
     if (!user) {
-      console.log("user:", user);
       return {
         errors: invalidLoginResponseErrors,
       };

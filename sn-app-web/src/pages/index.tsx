@@ -23,7 +23,6 @@ const Index = () => {
     // TODO: improve later
     return (
       <Layout>
-        {console.log(`from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`)}
         <div>
           <CoinFlip />
           <div>{error?.message}</div>
@@ -36,17 +35,11 @@ const Index = () => {
       <Box overflow="auto">
         {!data && loading ? (
           <>
-            {console.log(
-              `from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
-            )}
             <CoinFlip />
             <div>loading...</div>
           </>
         ) : (
           <>
-            {console.log(
-              `from index: ${process.env.NEXT_PUBLIC_SN_USER_API_URL}`
-            )}
             <CoinFlip />
             <Stack spacing={8}>
               {data!.posts.posts.map((p) =>

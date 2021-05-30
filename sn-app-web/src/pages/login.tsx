@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Link } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -9,46 +9,54 @@ import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { withApollo } from "../utils/withApollo";
 
-interface loginProps {}
+interface loginValues {
+  usernameOrEmail: string;
+  password: string;
+}
 
-export const Login: React.FC<loginProps> = ({}) => {
+export const Login: React.FC = ({}) => {
   const router = useRouter();
   const [login] = useLoginMutation();
+  const initialValues = { usernameOrEmail: "", password: "" };
+
+  const submitForm = async (
+    values: loginValues,
+    { setErrors }: FormikHelpers<loginValues>
+  ) => {
+    const response = await login({
+      variables: values,
+      update: (cache, { data }) => {
+        cache.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            __typename: "Query",
+            me: data?.login.user,
+          },
+        });
+        cache.evict({ fieldName: "posts:{}" });
+      },
+    });
+    if (response.data?.login.errors) {
+      setErrors(toErrorMap(response.data.login.errors));
+    } else if (response.data?.login.user) {
+      if (typeof router.query.next === "string") {
+        router.push(router.query.next);
+      } else {
+        router.push("/");
+      }
+    }
+  };
+  
   return (
     <Layout variant="small">
-      <Formik
-        initialValues={{ usernameOrEmail: "", password: "" }}
-        onSubmit={async (values, { setErrors }) => {
-          const response = await login({
-            variables: values,
-            update: (cache, { data }) => {
-              cache.writeQuery<MeQuery>({
-                query: MeDocument,
-                data: {
-                  __typename: "Query",
-                  me: data?.login.user,
-                },
-              });
-              cache.evict({ fieldName: "posts:{}" });
-            },
-          });
-          if (response.data?.login.errors) {
-            setErrors(toErrorMap(response.data.login.errors));
-          } else if (response.data?.login.user) {
-            if (typeof router.query.next === "string") {
-              router.push(router.query.next);
-            } else {
-              router.push("/");
-            }
-          }
-        }}
-      >
+      <Formik initialValues={initialValues} onSubmit={submitForm}>
         {({ isSubmitting }) => (
           <Form>
             <InputField
               label="Username / Email"
               name="usernameOrEmail"
               placeholder="Username Or Email"
+              isRequired
             />
             <Box mt={4}>
               <InputField
@@ -56,21 +64,24 @@ export const Login: React.FC<loginProps> = ({}) => {
                 name="password"
                 placeholder="Password"
                 type="password"
+                isRequired
               />
             </Box>
-            <Flex mt={2}>
+            <Box mt={2}>
               <NextLink href="/forgot-password">
-                <Link ml="auto">Forgot Password?</Link>
+                <Link>Forgot Password?</Link>
               </NextLink>
+            </Box>
+            <Flex mt={4}>
+              <Button
+                ml="auto"
+                type="submit"
+                colorScheme="teal"
+                isLoading={isSubmitting}
+              >
+                login
+              </Button>
             </Flex>
-            <Button
-              mt={4}
-              type="submit"
-              colorScheme="teal"
-              isLoading={isSubmitting}
-            >
-              login
-            </Button>
           </Form>
         )}
       </Formik>

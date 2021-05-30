@@ -11,11 +11,12 @@ export const InputField: React.FC<
   InputHTMLAttributes<HTMLInputElement> & {
     name: string;
     label: string;
+    isRequired?: boolean;
   }
-> = ({ label, size: _, ...props }) => {
+> = ({ label, size: _, isRequired, ...props }) => {
   const [field, { error }] = useField(props);
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} isRequired={isRequired}>
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <Input {...field} {...props} id={field.name} />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
