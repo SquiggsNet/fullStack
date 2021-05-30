@@ -13,15 +13,15 @@ build:
             strip: "sn-user-server/dist/"
       docker:
         dockerfile: Dockerfile
-    - image: squiggsnet/sn-app-web
-      context: sn-app-web
-      sync:
-        manual:
-          - src: "sn-app-web/.next/**/*.js"
-            dest: sn-app-web
-            strip: "sn-app-web/.next/"
-      docker:
-        dockerfile: Dockerfile
+    # - image: squiggsnet/sn-app-web
+    #   context: sn-app-web
+    #   sync:
+    #     manual:
+    #       - src: "sn-app-web/.next/**/*.js"
+    #         dest: sn-app-web
+    #         strip: "sn-app-web/.next/"
+    #   docker:
+    #     dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
@@ -33,8 +33,8 @@ deploy:
       - k8s/local/redis/redis-deployment.yaml
       - k8s/local/sn-user-server/sn-user-server-configmap.yaml
       - k8s/local/sn-user-server/sn-user-server-deployment.yaml
-      - k8s/local/sn-app-web/sn-app-web-configmap.yaml
-      - k8s/local/sn-app-web/sn-app-web-deployment.yaml
+      # - k8s/local/sn-app-web/sn-app-web-configmap.yaml
+      # - k8s/local/sn-app-web/sn-app-web-deployment.yaml
 profiles:
 - name: gcb
   build:

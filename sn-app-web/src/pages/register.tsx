@@ -1,5 +1,6 @@
-import { Box, Button } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Form, Formik, FormikHelpers } from "formik";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
@@ -8,45 +9,76 @@ import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { withApollo } from "../utils/withApollo";
 
-interface registerProps {}
+interface registerValues {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+}
 
-export const Register: React.FC<registerProps> = ({}) => {
+export const Register: React.FC = ({}) => {
   const router = useRouter();
   const [register] = useRegisterMutation();
+  const initialValues = {
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  const validate = (values: registerValues) => {
+    const errors: registerValues = initialValues;
+    let hasErrors = false;
+    const hasPasswords = values.password && values.confirmPassword;
+    if (hasPasswords) {
+      const hasSamePasswords = values.password === values.confirmPassword;
+      if (!hasSamePasswords) {
+        hasErrors = true;
+        errors.confirmPassword =
+          "Confirmation password does not match password";
+      }
+      else {
+        errors.confirmPassword = "";
+      }
+    }
+    return hasErrors ? errors : {};
+  };
+
+  const submitForm = async (
+    values: registerValues,
+    { setErrors }: FormikHelpers<registerValues>
+  ) => {
+    const response = await register({
+      variables: {
+        options: {
+          email: values.email,
+          username: values.username,
+          password: values.password,
+        },
+      },
+      update: (cache, { data }) => {
+        cache.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            __typename: "Query",
+            me: data?.register.user,
+          },
+        });
+      },
+    });
+    if (response.data?.register.errors) {
+      setErrors(toErrorMap(response.data.register.errors));
+    } else if (response.data?.register.user) {
+      router.push("/");
+    }
+  };
+  
   return (
     <Layout variant="small">
       <Formik
-        initialValues={{
-          email: "",
-          username: "",
-          password: "",
-          confirmPassword: "",
-        }}
-        onSubmit={async (values, { setErrors }) => {
-          const response = await register({
-            variables: {
-              options: {
-                email: values.email,
-                username: values.username,
-                password: values.password,
-              },
-            },
-            update: (cache, { data }) => {
-              cache.writeQuery<MeQuery>({
-                query: MeDocument,
-                data: {
-                  __typename: "Query",
-                  me: data?.register.user,
-                },
-              });
-            },
-          });
-          if (response.data?.register.errors) {
-            setErrors(toErrorMap(response.data.register.errors));
-          } else if (response.data?.register.user) {
-            router.push("/");
-          }
-        }}
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={submitForm}
       >
         {({ isSubmitting }) => (
           <Form>
@@ -54,6 +86,7 @@ export const Register: React.FC<registerProps> = ({}) => {
               label="Username"
               name="username"
               placeholder="Username"
+              isRequired
             />
             <Box mt={4}>
               <InputField
@@ -61,6 +94,7 @@ export const Register: React.FC<registerProps> = ({}) => {
                 name="email"
                 placeholder="Email"
                 type="email"
+                isRequired
               />
             </Box>
             <Box mt={4}>
@@ -69,6 +103,7 @@ export const Register: React.FC<registerProps> = ({}) => {
                 name="password"
                 placeholder="Password"
                 type="password"
+                isRequired
               />
             </Box>
             <Box mt={4}>
@@ -77,16 +112,24 @@ export const Register: React.FC<registerProps> = ({}) => {
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 type="password"
+                isRequired
               />
             </Box>
-            <Button
-              mt={4}
-              type="submit"
-              colorScheme="teal"
-              isLoading={isSubmitting}
-            >
-              Register
-            </Button>
+            <Box mt={2}>
+              <NextLink href="/forgot-password">
+                <Link>Forgot Password?</Link>
+              </NextLink>
+            </Box>
+            <Flex mt={4}>
+              <Button
+                ml="auto"
+                type="submit"
+                colorScheme="teal"
+                isLoading={isSubmitting}
+              >
+                Register
+              </Button>
+            </Flex>
           </Form>
         )}
       </Formik>
