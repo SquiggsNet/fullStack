@@ -77,7 +77,7 @@ const main = async () => {
       cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         httpOnly: true,
-        sameSite: "none",
+        sameSite: "lax", // csrf (Squiggs: read more)
         secure: __prod__, // cookie only works in https (if !https in prod, turn off)
         domain: __prod__ ? process.env.CORS_ORIGIN : undefined,
       },
