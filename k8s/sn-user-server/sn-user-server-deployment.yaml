@@ -33,6 +33,11 @@ spec:
             configMapKeyRef:
               name: sn-web-configmap
               key: sn_web_cors_url 
+        - name: CORS_ORIGIN_2
+          valueFrom:
+            configMapKeyRef:
+              name: sn-web-configmap
+              key: sn_web_cors_url_2
         - name: PORT
           valueFrom:
             configMapKeyRef:

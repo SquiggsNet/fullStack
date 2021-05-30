@@ -5,4 +5,5 @@ metadata:
   namespace: prod
 data:
   sn_web_url: sn-web-service
-  sn_web_cors_url: squiggs.net  # change to web url when fe/be working
+  sn_web_cors_url: https://app.squiggs.net  # change to web url when fe/be working
+  sn_web_cors_url_2: https://the-squiggs-net.vercel.app  # change to web url when fe/be working
