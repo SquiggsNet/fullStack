@@ -54,7 +54,7 @@ const response = await changePassword({
   variables: {
     newPassword: values.newPassword,
     token:
-      typeof router.query.token === "string" ? typeof router.query.token : "",
+      typeof router.query.token === "string" ? router.query.token : "",
   },
   update: (cache, { data }) => {
     cache.writeQuery<MeQuery>({
