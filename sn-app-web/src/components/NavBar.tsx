@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
@@ -69,8 +69,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
               <NextLink href="/">
                 <MenuItem color="white">Home</MenuItem>
               </NextLink>
+              <NextLink href="/post/create">
+                <MenuItem color="white">Create Post</MenuItem>
+              </NextLink>
               <NextLink href="/flip-coin">
-                <MenuItem color="white">Flip Coin</MenuItem>
+                <MenuItem color="white"> Flip Coin</MenuItem>
               </NextLink>
             </MenuList>
           </Portal>
