@@ -43,6 +43,16 @@ spec:
             configMapKeyRef:
               name: user-server-configmap
               key: user_server_port 
+        - name: SIB_SMTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: user-server-secret
+              key: sib_smtp_user 
+        - name: SIB_SMTP_PASS
+          valueFrom:
+            secretKeyRef:
+              name: user-server-secret
+              key: sib_smtp_pass
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
