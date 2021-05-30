@@ -70,6 +70,7 @@ export class UserResolver {
     }
     const key = FORGET_PASSWORD_PREFIX + token;
     const userId = await redis.get(key);
+    console.log(`forgotpass userId: ${userId}`);
     if (!userId) {
       return {
         errors: [
@@ -110,6 +111,7 @@ export class UserResolver {
       return true;
     }
     const token = v4();
+    console.log(`forgotpass email userId: ${user.id}`);
     await redis.set(
       FORGET_PASSWORD_PREFIX + token,
       user.id,
@@ -117,7 +119,7 @@ export class UserResolver {
       1000 * 60 * 15 // 15 min expiry
     );
     // TODO: generate email template
-    const body = `<a href="http://localhost:3000/change-password/${token}">reset password</a>`;
+    const body = `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`;
     sendEmail(email, "Password Recovery - TheSquiggsNet", body);
     return true;
   }
