@@ -1,9 +1,10 @@
-import { Box, Button, Flex, Heading, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
 import { useApolloClient } from "@apollo/client";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface NavBarProps {}
 
@@ -20,53 +21,60 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <>
         <NextLink href="/login">
-          <Link color="white" mr={2}>
+          <Button color="white" variant="link" as={Link} mr={2}>
             Login
-          </Link>
+          </Button>
         </NextLink>
         <NextLink href="/register">
-          <Link color="white">Register</Link>
+          <Button color="white" variant="link" as={Link} mr={2}>
+            Register
+          </Button>
         </NextLink>
       </>
     );
   } else {
     body = (
       <Flex align="center">
-        <NextLink href="/flip-coin">
-          <Button as={Link} mr={2}>
-            Flip Coin
-          </Button>
-        </NextLink>
-        <NextLink href="/post/create">
-          <Button as={Link} mr={2}>
-            Create Post
-          </Button>
-        </NextLink>
-        <Box mr={2}>{data.me.username}</Box>
-        <Box>
-          <Button
-            onClick={async () => {
-              await logout();
-              await apolloClient.resetStore();
-            }}
-            isLoading={logoutFecthing}
-            color="white"
-            variant="link"
-          >
-            Logout
-          </Button>
-        </Box>
+        <Menu>
+          <MenuButton color="white" as={Button} rightIcon={<ChevronDownIcon />}>
+            {data.me.username}
+          </MenuButton>
+          <Portal>
+            <MenuList bg="#00db9a">
+              <MenuItem
+                color="white"
+                onClick={async () => {
+                  await logout();
+                  await apolloClient.resetStore();
+                }}
+                isLoading={logoutFecthing}
+              >
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Portal>
+        </Menu>
       </Flex>
     );
   }
   return (
     <Flex zIndex={1} position="sticky" top={0} bg="#00db9a" p={4}>
       <Flex flex={1} align="center" m="auto" maxW={1050}>
-        <NextLink href="/">
-          <Link>
-            <Heading>theSquiggsNet</Heading>
-          </Link>
-        </NextLink>
+        <Menu>
+          <MenuButton color="white" as={Button} rightIcon={<ChevronDownIcon />}>
+            theSquiggsNet
+          </MenuButton>
+          <Portal>
+            <MenuList bg="#00db9a">
+              <NextLink href="/">
+                <MenuItem color="white">Home</MenuItem>
+              </NextLink>
+              <NextLink href="/flip-coin">
+                <MenuItem color="white">Flip Coin</MenuItem>
+              </NextLink>
+            </MenuList>
+          </Portal>
+        </Menu>
         <Box ml={"auto"}>{body}</Box>
       </Flex>
     </Flex>

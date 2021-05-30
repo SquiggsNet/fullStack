@@ -2,15 +2,15 @@ import { Grid, Hidden } from "@material-ui/core";
 import React, { useState } from "react";
 import { GameScreenCoinFlip } from "../components/GameScreenCoinFlip";
 import { GameSummary } from "../components/GameSummary";
-import { HighScoresList } from "../components/HighScoresList";
+// import { HighScoresList } from "../components/HighScoresList";
 
 interface Props {}
 
-interface UserScore {
-  id: number;
-  name: string;
-  score: number;
-}
+// interface UserScore {
+//   id: number;
+//   name: string;
+//   score: number;
+// }
 
 const coinLookUp = ["H", "T"];
 
@@ -21,17 +21,17 @@ const getRandomNumber = (max: number, min: number) => {
 // const lastTenRuns = ["H", "T", "H", "H", "T"];
 
 const summaryInfo = {
-  name: "Squiggs",
+  name: "User",
   currentRun: 22,
   AllTimeRun: 35,
 };
 
-const highScores: UserScore[] = [
-  { id: 1, name: "Squiggs", score: 35 },
-  { id: 2, name: "Mecloving", score: 32 },
-  { id: 3, name: "Lbox", score: 31 },
-  { id: 4, name: "Its not a moon", score: 264 },
-];
+// const highScores: UserScore[] = [
+//   { id: 1, name: "Squiggs", score: 35 },
+//   { id: 2, name: "Mecloving", score: 32 },
+//   { id: 3, name: "Lbox", score: 31 },
+//   { id: 4, name: "Its not a moon", score: 264 },
+// ];
 
 export const CoinFlip: React.FC<Props> = () => {
   const [coin, setCoin] = useState<string | null>(null);
@@ -98,9 +98,9 @@ export const CoinFlip: React.FC<Props> = () => {
             />
           </Grid>
         </Hidden>
-        <Grid item xs={12} md={6} lg={4}>
+        {/* <Grid item xs={12} md={6} lg={4}>
           <HighScoresList scores={highScores} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );
