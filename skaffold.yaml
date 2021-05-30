@@ -32,6 +32,7 @@ deploy:
       - k8s/local/redis/redis-secret.yaml
       - k8s/local/redis/redis-deployment.yaml
       - k8s/local/sn-user-server/sn-user-server-configmap.yaml
+      - k8s/local/sn-user-server/sn-user-server-secret.yaml
       - k8s/local/sn-user-server/sn-user-server-deployment.yaml
       # - k8s/local/sn-app-web/sn-app-web-configmap.yaml
       # - k8s/local/sn-app-web/sn-app-web-deployment.yaml

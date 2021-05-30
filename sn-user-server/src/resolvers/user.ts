@@ -209,7 +209,6 @@ export class UserResolver {
     });
 
     if (!user) {
-      console.log("user:", user);
       return {
         errors: invalidLoginResponseErrors,
       };
