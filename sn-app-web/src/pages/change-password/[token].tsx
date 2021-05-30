@@ -1,5 +1,5 @@
 import { Box, Button, Link } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -15,45 +15,76 @@ import {
 import { toErrorMap } from "../../utils/toErrorMap";
 import { withApollo } from "../../utils/withApollo";
 
+interface resetValues {
+  newPassword: string;
+  confirmPassword: string;
+}
+
 const ChangePassword: NextPage = () => {
   const router = useRouter();
   const [changePassword] = useChangePasswordMutation();
   const [tokenError, setTokenError] = useState("");
+  const initialValues = {
+    newPassword: "",
+    confirmPassword: "",
+  };
+
+  const validate = (values: resetValues) => {
+    const errors: resetValues = initialValues;
+    let hasErrors = false;
+    const hasPasswords = values.newPassword && values.confirmPassword;
+    if (hasPasswords) {
+      const hasSamePasswords = values.newPassword === values.confirmPassword;
+      if (!hasSamePasswords) {
+        hasErrors = true;
+        errors.confirmPassword =
+          "Confirmation password does not match password";
+      } else {
+        errors.confirmPassword = "";
+      }
+    }
+    return hasErrors ? errors : {};
+  };
+
+  const submitForm = async (
+    values: resetValues,
+    { setErrors }: FormikHelpers<resetValues>
+  ) => {
+const response = await changePassword({
+  variables: {
+    newPassword: values.newPassword,
+    token:
+      typeof router.query.token === "string" ? typeof router.query.token : "",
+  },
+  update: (cache, { data }) => {
+    cache.writeQuery<MeQuery>({
+      query: MeDocument,
+      data: {
+        __typename: "Query",
+        me: data?.changePassword.user,
+      },
+    });
+  },
+});
+if (response.data?.changePassword.errors) {
+  const errorMap = toErrorMap(response.data.changePassword.errors);
+  if ("token" in errorMap) {
+    setTokenError(errorMap.token);
+  }
+  setErrors(errorMap);
+} else if (response.data?.changePassword.user) {
+  router.push("/");
+}
+  };
+
   return (
     <>
       <NavBar />
       <Wrapper variant="small">
         <Formik
-          initialValues={{ confirmPassword: "", newPassword: "" }}
-          onSubmit={async (values, { setErrors }) => {
-            const response = await changePassword({
-              variables: {
-                newPassword: values.newPassword,
-                token:
-                  typeof router.query.token === "string"
-                    ? typeof router.query.token
-                    : "",
-              },
-              update: (cache, { data }) => {
-                cache.writeQuery<MeQuery>({
-                  query: MeDocument,
-                  data: {
-                    __typename: "Query",
-                    me: data?.changePassword.user,
-                  },
-                });
-              },
-            });
-            if (response.data?.changePassword.errors) {
-              const errorMap = toErrorMap(response.data.changePassword.errors);
-              if ("token" in errorMap) {
-                setTokenError(errorMap.token);
-              }
-              setErrors(errorMap);
-            } else if (response.data?.changePassword.user) {
-              router.push("/");
-            }
-          }}
+          initialValues={initialValues}
+          validate={validate}
+          onSubmit={submitForm}
         >
           {({ isSubmitting }) => (
             <Form>
@@ -63,6 +94,7 @@ const ChangePassword: NextPage = () => {
                   name="newPassword"
                   placeholder="New Password"
                   type="password"
+                  required
                 />
               </Box>
               <Box mt={4}>
@@ -71,6 +103,7 @@ const ChangePassword: NextPage = () => {
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   type="password"
+                  required
                 />
               </Box>
               {tokenError ? (

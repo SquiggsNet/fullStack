@@ -156,14 +156,39 @@ export class UserResolver {
       user = result.raw[0];
     } catch (error) {
       if (error.code === "23505") {
-        return {
-          errors: [
-            {
-              field: "username",
-              message: "username already exists",
-            },
-          ],
-        };
+        if (error.detail.includes('username')) {
+          return {
+            errors: [
+              {
+                field: "username",
+                message: "username already exists",
+              }
+            ],
+          };
+        }
+        else if (error.detail.includes("email")) {
+          return {
+            errors: [
+              {
+                field: "email",
+                message: "email already exists",
+              },
+            ],
+          };
+        } else {
+          return {
+            errors: [
+              {
+                field: "username",
+                message: "username or email already exists",
+              },
+              {
+                field: "email",
+                message: "username or email already exists",
+              },
+            ],
+          };
+        }
       }
     }
 
