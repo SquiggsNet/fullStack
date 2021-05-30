@@ -75,9 +75,9 @@ const main = async () => {
         disableTouch: true,
       }),
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 365, // 1yr
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         httpOnly: true,
-        sameSite: "lax", // csrf (Squiggs: read more)
+        sameSite: "none",
         secure: __prod__, // cookie only works in https (if !https in prod, turn off)
         domain: __prod__ ? process.env.CORS_ORIGIN : undefined,
       },
