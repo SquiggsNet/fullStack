@@ -2,7 +2,6 @@ import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
-import { CoinFlip } from "../components/CoinFlip";
 import { EditDeletePostButtons } from "../components/EditDeletePostButtons";
 import { Layout } from "../components/Layout";
 import { UpvoteSection } from "../components/UpvoteSection";
@@ -24,7 +23,6 @@ const Index = () => {
     return (
       <Layout>
         <div>
-          <CoinFlip />
           <div>{error?.message}</div>
         </div>
       </Layout>
@@ -35,12 +33,10 @@ const Index = () => {
       <Box overflow="auto">
         {!data && loading ? (
           <>
-            <CoinFlip />
             <div>loading...</div>
           </>
         ) : (
           <>
-            <CoinFlip />
             <Stack spacing={8}>
               {data!.posts.posts.map((p) =>
                 !p ? null : (

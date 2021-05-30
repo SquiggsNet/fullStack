@@ -32,6 +32,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex align="center">
+        <NextLink href="/flip-coin">
+          <Button as={Link} mr={2}>
+            Flip Coin
+          </Button>
+        </NextLink>
         <NextLink href="/post/create">
           <Button as={Link} mr={2}>
             Create Post
