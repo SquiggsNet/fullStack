@@ -79,7 +79,7 @@ const main = async () => {
         httpOnly: true,
         sameSite: "lax", // csrf (Squiggs: read more)
         secure: __prod__, // cookie only works in https (if !https in prod, turn off)
-        domain: __prod__ ? ".squiggs.net" : undefined,
+        domain: __prod__ ? process.env.CORS_ORIGIN : undefined,
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET ? process.env.SESSION_SECRET : "",
