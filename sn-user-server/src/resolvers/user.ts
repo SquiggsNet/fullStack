@@ -15,7 +15,7 @@ import argon2 from "argon2";
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from "../constants";
 import { UsernamePasswordInput } from "./UsernamePasswordInput";
 import { validatePassowrd, validateRegister } from "../utils/validateRegister";
-// import { sendEmail } from "../utils/sendEmail";
+import { sendEmail } from "../utils/sendEmail";
 import { v4 } from "uuid";
 import { getConnection } from "typeorm";
 
@@ -123,8 +123,8 @@ export class UserResolver {
     const userId = await redis.get(FORGET_PASSWORD_PREFIX + token);
     console.log(`forgotpass redis key: ${FORGET_PASSWORD_PREFIX + token}`);
     console.log(`forgotpass redis userId: ${userId}`);
-    // const body = `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`;
-    // sendEmail(email, "Password Recovery - TheSquiggsNet", body);
+    const body = `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">reset password</a>`;
+    sendEmail(email, "Password Recovery - TheSquiggsNet", body);
     return true;
   }
 
