@@ -52,20 +52,19 @@ const main = async () => {
 
   app.set("trust proxy", 1);
   // CORS
-  const allowedDomains = [process.env.CORS_ORIGIN, process.env.CORS_ORIGIN_2];
-  app.use(cors({
-    origin: function (origin, callback) {
-    // bypass the requests with no origin (like curl requests, mobile apps, etc )
-    if (!origin) return callback(null, true);
- 
-    if (allowedDomains.indexOf(origin) === -1) {
-      var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-    credentials: true
-  }));
+  const allowedDomains = [];
+  if (process.env.CORS_ORIGIN) {
+    allowedDomains.push(process.env.CORS_ORIGIN);
+  }
+  if (process.env.CORS_ORIGIN_2) {
+    allowedDomains.push(process.env.CORS_ORIGIN_2);
+  }
+  app.use(
+    cors({
+      origin: allowedDomains,
+      credentials: true,
+    })
+  );
 
   // Redis for session authentication
   app.use(
