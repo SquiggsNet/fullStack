@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sn-web-configmap
+data:
+  sn_web_url: sn-web-service
+  sn_web_cors_url: http://localhost:3000  # change to web url when fe/be working
+  sn_web_cors_url_2: https://the-squiggs-net.vercel.app  # change to web url when fe/be working

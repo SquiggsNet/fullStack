@@ -4,7 +4,7 @@ build:
   tagPolicy:  
     sha256: {}
   artifacts:
-    - image: gcr.io/thesquiggsnet/sn-user-server
+    - image: squiggsnet/sn-user-server
       context: sn-user-server
       sync:
         manual:
@@ -13,7 +13,7 @@ build:
             strip: "sn-user-server/dist/"
       docker:
         dockerfile: Dockerfile
-    - image: gcr.io/thesquiggsnet/sn-app-web
+    - image: squiggsnet/sn-app-web
       context: sn-app-web
       sync:
         manual:
@@ -25,21 +25,16 @@ build:
 deploy:
   kubectl:
     manifests:
-      - k8s/postgres/postgres-persistent-volume-claim.yaml
-      - k8s/postgres/postgres-configmap.yaml
-      - k8s/postgres/postgres-secret.yaml
-      - k8s/postgres/postgres-deployment.yaml
-      # - k8s/postgres/postgres-cron-job.yaml
-      - k8s/redis/redis-configmap.yaml
-      - k8s/redis/redis-secret.yaml
-      - k8s/redis/redis-deployment.yaml
-      - k8s/sn-user-server/sn-user-server-configmap.yaml
-      - k8s/sn-user-server/sn-user-server-deployment.yaml
-      - k8s/sn-user-server/sn-user-server-ingress.yaml
-      - k8s/sn-app-web/sn-app-web-configmap.yaml
-      - k8s/sn-app-web/sn-app-web-deployment.yaml
-      - k8s/sn-app-web/sn-app-web-ingress.yaml
-      # - k8s/sn-app-secret.yaml
+      - k8s/local/postgres/postgres-configmap.yaml
+      - k8s/local/postgres/postgres-secret.yaml
+      - k8s/local/postgres/postgres-deployment.yaml
+      - k8s/local/redis/redis-configmap.yaml
+      - k8s/local/redis/redis-secret.yaml
+      - k8s/local/redis/redis-deployment.yaml
+      - k8s/local/sn-user-server/sn-user-server-configmap.yaml
+      - k8s/local/sn-user-server/sn-user-server-deployment.yaml
+      - k8s/local/sn-app-web/sn-app-web-configmap.yaml
+      - k8s/local/sn-app-web/sn-app-web-deployment.yaml
 profiles:
 - name: gcb
   build:

@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-server-deployment
+  labels:
+    app: user-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-server
+  template:
+    metadata:
+      labels:
+        app: user-server
+    spec:
+      containers:
+      - name: user-server
+        image: squiggsnet/sn-user-server
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 750m
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        - containerPort: 4000
+        env:
+        - name: CORS_ORIGIN
+          valueFrom:
+            configMapKeyRef:
+              name: sn-web-configmap
+              key: sn_web_cors_url 
+        - name: CORS_ORIGIN_2
+          valueFrom:
+            configMapKeyRef:
+              name: sn-web-configmap
+              key: sn_web_cors_url_2
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: user-server-configmap
+              key: user_server_port 
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres_user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres_password
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: postgres_db 
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: postgres_url 
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: redis-configmap
+              key: redis_url 
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: session_sercret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-server-service
+  labels:
+    app: user-server
+spec:
+  selector:
+    app: user-server
+  type: NodePort
+  ports:
+  - port: 4000
+    protocol: TCP
+    name: user-server-prt

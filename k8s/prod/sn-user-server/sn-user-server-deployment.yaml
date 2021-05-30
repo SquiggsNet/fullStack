@@ -89,4 +89,3 @@ spec:
   - port: 4000
     protocol: TCP
     name: user-server-prt
-    # 34.102.255.171

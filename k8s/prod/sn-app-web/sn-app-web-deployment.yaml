@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sn-web-deployement
+  namespace: prod
+  labels:
+    app: sn-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sn-web
+  template:
+    metadata:
+      labels:
+        app: sn-web
+    spec:
+      containers:
+      - name: sn-web
+        image: gcr.io/thesquiggsnet/sn-app-web
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 750m
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        - containerPort: 3000
+        env:    
+        - name: NEXT_PUBLIC_SN_USER_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: user-server-configmap
+              key: user_server_graphql_url 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sn-web-service
+  namespace: prod
+  labels:
+    app: sn-web
+spec:
+  selector:
+    app: sn-web
+  ports:
+  - port: 3000
+    protocol: TCP
+    name: sn-web-port
+  type: NodePort

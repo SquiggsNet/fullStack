@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-server-configmap
+data:
+  user_server_url: user-server-service
+  user_server_graphql_url: sn-api.squiggs.net/graphql # change to server url when fe/be working
+  user_server_port: "4000"

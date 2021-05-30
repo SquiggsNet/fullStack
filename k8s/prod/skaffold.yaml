@@ -1,0 +1,46 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  tagPolicy:  
+    sha256: {}
+  artifacts:
+    - image: gcr.io/thesquiggsnet/sn-user-server
+      context: sn-user-server
+      sync:
+        manual:
+          - src: "sn-user-server/dist/**/*.js"
+            dest: sn-user-server
+            strip: "sn-user-server/dist/"
+      docker:
+        dockerfile: Dockerfile
+    - image: gcr.io/thesquiggsnet/sn-app-web
+      context: sn-app-web
+      sync:
+        manual:
+          - src: "sn-app-web/.next/**/*.js"
+            dest: sn-app-web
+            strip: "sn-app-web/.next/"
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - postgres/postgres-persistent-volume-claim.yaml
+      - postgres/postgres-configmap.yaml
+      - postgres/postgres-secret.yaml
+      - postgres/postgres-deployment.yaml
+      # - postgres/postgres-cron-job.yaml #needs implementing
+      - redis/redis-configmap.yaml
+      - redis/redis-secret.yaml
+      - redis/redis-deployment.yaml
+      - sn-user-server/sn-user-server-configmap.yaml
+      - sn-user-server/sn-user-server-deployment.yaml
+      - sn-user-server/sn-user-server-ingress.yaml
+      - sn-app-web/sn-app-web-configmap.yaml
+      - sn-app-web/sn-app-web-deployment.yaml
+      - sn-app-web/sn-app-web-ingress.yaml
+profiles:
+- name: gcb
+  build:
+    googleCloudBuild:
+      projectId: thesquiggsnet
