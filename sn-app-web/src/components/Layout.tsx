@@ -4,7 +4,7 @@ import { Wrapper, WrapperVariant } from "./Wrapper";
 
 interface LayoutProps {
   variant?: WrapperVariant;
-  color: string;
+  color?: string;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, variant, color }) => {

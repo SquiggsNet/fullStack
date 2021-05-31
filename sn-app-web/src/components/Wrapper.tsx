@@ -5,7 +5,7 @@ export type WrapperVariant = "small" | "regular";
 
 interface WrapperProps {
   variant?: WrapperVariant;
-  color: string;
+  color?: string;
 }
 
 export const Wrapper: React.FC<WrapperProps> = ({
