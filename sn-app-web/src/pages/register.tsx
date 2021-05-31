@@ -74,7 +74,7 @@ export const Register: React.FC = ({}) => {
   };
   
   return (
-    <Layout variant="small">
+    <Layout color="snlightshades" variant="small">
       <Formik
         initialValues={initialValues}
         validate={validate}
@@ -117,7 +117,7 @@ export const Register: React.FC = ({}) => {
             </Box>
             <Box mt={2}>
               <NextLink href="/forgot-password">
-                <Link>Forgot Password?</Link>
+                <Link color="snlightaccent">Forgot Password?</Link>
               </NextLink>
             </Box>
             <Flex mt={4}>

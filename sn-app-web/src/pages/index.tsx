@@ -21,7 +21,7 @@ const Index = () => {
   if (!loading && !data) {
     // TODO: improve later
     return (
-      <Layout>
+      <Layout color="snlightshades">
         <div>
           <div>{error?.message}</div>
         </div>
@@ -40,7 +40,13 @@ const Index = () => {
             <Stack spacing={8}>
               {data!.posts.posts.map((p) =>
                 !p ? null : (
-                  <Flex key={p.id} p={5} shadow="md" borderWidth="1px">
+                  <Flex
+                    bg="snlightshades"
+                    key={p.id}
+                    p={5}
+                    shadow="md"
+                    borderWidth="1px"
+                  >
                     <UpvoteSection post={p} />
                     <Box flex={1}>
                       <NextLink href="/post/[id]" as={`/post/${p.id}`}>

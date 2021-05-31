@@ -1,4 +1,4 @@
-import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
+import { Box, ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import theme from "../theme";
 
 function MyApp({ Component, pageProps }: any) {
@@ -6,10 +6,12 @@ function MyApp({ Component, pageProps }: any) {
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
         options={{
-          useSystemColorMode: true,
+          initialColorMode: "dark",
         }}
       >
-        <Component {...pageProps} />
+        <Box bg="background" minWidth="min-content" minHeight="100vh">
+          <Component {...pageProps} />
+        </Box>
       </ColorModeProvider>
     </ChakraProvider>
   );

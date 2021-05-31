@@ -12,7 +12,7 @@ export const CreatePost: React.FC<{}> = ({}) => {
   const [createPost] = useCreatePostMutation();
   const router = useRouter();
   return (
-    <Layout variant="small">
+    <Layout color="snlightshades" variant="small">
       <Formik
         initialValues={{ title: "", text: "" }}
         onSubmit={async (values) => {

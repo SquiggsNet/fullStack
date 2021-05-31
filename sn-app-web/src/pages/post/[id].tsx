@@ -10,7 +10,7 @@ const Post = ({}) => {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout color="snlightshades">
         <Box>loading...</Box>
       </Layout>
     );
@@ -18,14 +18,14 @@ const Post = ({}) => {
 
   if (!data?.post) {
     return (
-      <Layout>
+      <Layout color="snlightshades">
         <Box>loading...</Box>
       </Layout>
     );
   }
 
   return (
-    <Layout>
+    <Layout color="snlightshades">
       <Heading mb={4}>{data.post.title}</Heading>
       <Box mb={4}>{data.post.text}</Box>
       <EditDeletePostButtons

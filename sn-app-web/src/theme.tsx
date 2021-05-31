@@ -2,9 +2,9 @@ import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const fonts = {
-  color: 'sndarkshades',
-  mono: `'Menlo', monospace`
-}
+  color: "#111331",
+  mono: `'Menlo', monospace`,
+};
 
 const breakpoints = createBreakpoints({
   sm: '40em',
@@ -16,20 +16,19 @@ const breakpoints = createBreakpoints({
 const theme = extendTheme({
   colors: {
     black: "#191919",
-    white: "#EDE5DA",
-    background: "#EDE5DA",
-    snlightshades: "#EDE5DA",
-    snlightaccent: "#879F8E",
-    snmain: "#864C2C",
-    sndarkaccent: "#A17845",
-    sndarkshades: "#361E1B",
-    primary: "#864b2b",
-    Info: "#361e1b",
-    success: "#5d9145",
-    warning: "#db810d",
+    white: "#ffffff",
+    background: "#111331",
+    snlightshades: "#F9FAF6",
+    snlightaccent: "#4499D8",
+    snmain: "#6C4B8C",
+    sndarkaccent: "#4483B8",
+    sndarkshades: "#111331",
+    primary: "#6c4b8c",
+    Info: "#111331",
+    success: "#569162",
+    warning: "#d3812a",
     danger: "#f44336",
   },
-  backgroundColor: "#EDE5DA",
   fonts,
   breakpoints,
   icons: {

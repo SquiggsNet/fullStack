@@ -6,7 +6,7 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
-          <title>theSquiggsNet</title>
+          {/* <title>theSquiggsNet</title> this should not be done here  */}
           <meta property="og:title" content="theSquiggsNet" key="title" />
           <link rel="icon" href="/favicon.ico" />
         </Head>

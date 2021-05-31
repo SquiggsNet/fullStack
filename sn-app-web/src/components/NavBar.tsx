@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal, useColorMode } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
@@ -9,6 +9,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [logout, { loading: logoutFecthing }] = useLogoutMutation();
   const apolloClient = useApolloClient();
   const { data, loading } = useMeQuery({
@@ -44,7 +45,13 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
             {data.me.username}
           </MenuButton>
           <Portal>
-            <MenuList bg="black">
+            <MenuList bg="snmain">
+              <MenuItem
+                color="snlightshades"
+                onClick={toggleColorMode}
+              >
+                Toggle {colorMode === "light" ? "Dark" : "Light"}
+              </MenuItem>
               <MenuItem
                 color="snlightshades"
                 onClick={async () => {
@@ -62,7 +69,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex zIndex={1} position="sticky" top={0} bg="black" p={4}>
+    <Flex zIndex={1} position="sticky" top={0} bg="snmain" p={4}>
       <Flex flex={1} align="center" m="auto" maxW={1050}>
         <Menu>
           <MenuButton
@@ -73,7 +80,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
             theSquiggsNet
           </MenuButton>
           <Portal>
-            <MenuList bg="black">
+            <MenuList bg="snmain">
               <NextLink href="/">
                 <MenuItem color="snlightshades">Home</MenuItem>
               </NextLink>

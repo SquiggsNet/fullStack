@@ -26,7 +26,7 @@ export const EditPost: React.FC<{}> = ({}) => {
 
   if (loading) {
     return (
-      <Layout>
+      <Layout color="snlightshades">
         <Box>loading...</Box>
       </Layout>
     );
@@ -34,14 +34,14 @@ export const EditPost: React.FC<{}> = ({}) => {
 
   if (!data?.post) {
     return (
-      <Layout>
+      <Layout color="snlightshades">
         <Box>loading...</Box>
       </Layout>
     );
   }
 
   return (
-    <Layout variant="small">
+    <Layout color="snlightshades" variant="small">
       <Formik
         initialValues={{ title: data.post.title, text: data.post.text }}
         onSubmit={async (values) => {
