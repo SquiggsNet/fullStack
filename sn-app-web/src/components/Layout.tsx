@@ -4,13 +4,14 @@ import { Wrapper, WrapperVariant } from "./Wrapper";
 
 interface LayoutProps {
   variant?: WrapperVariant;
+  color: string;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, variant }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, variant, color }) => {
   return (
     <>
       <NavBar />
-      <Wrapper variant={variant}>{children}</Wrapper>
+      <Wrapper color={color} variant={variant}>{children}</Wrapper>
     </>
   );
 };

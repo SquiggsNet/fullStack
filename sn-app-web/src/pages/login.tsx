@@ -48,7 +48,7 @@ export const Login: React.FC = ({}) => {
   };
   
   return (
-    <Layout variant="small">
+    <Layout color="snlightshades" variant="small">
       <Formik initialValues={initialValues} onSubmit={submitForm}>
         {({ isSubmitting }) => (
           <Form>
@@ -76,7 +76,8 @@ export const Login: React.FC = ({}) => {
               <Button
                 ml="auto"
                 type="submit"
-                colorScheme="teal"
+                bg="primary"
+                color="snlightshades"
                 isLoading={isSubmitting}
               >
                 login

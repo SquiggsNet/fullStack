@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import { useRouter } from "next/router";
@@ -59,14 +59,17 @@ export const EditPost: React.FC<{}> = ({}) => {
             <Box mt={4}>
               <InputField label="Body" name="text" placeholder="body" />
             </Box>
-            <Button
-              mt={4}
-              type="submit"
-              colorScheme="teal"
-              isLoading={isSubmitting}
-            >
-              Update post
-            </Button>
+            <Flex mt={4}>
+              <Button
+                ml="auto"
+                type="submit"
+                bg="primary"
+                color="snlightshades"
+                isLoading={isSubmitting}
+              >
+                Update post
+              </Button>
+            </Flex>
           </Form>
         )}
       </Formik>

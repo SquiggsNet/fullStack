@@ -26,16 +26,16 @@ export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({
         <IconButton
           as={Link}
           mr={4}
-          variant="outline"
-          colorScheme="teal"
+          bg="snlightshades"
+          color="warning"
           aria-label="edit post"
           size="sm"
           icon={<EditIcon />}
         />
       </NextLink>
       <IconButton
-        variant="outline"
-        colorScheme="red"
+        bg="snlightshades"
+        color="danger"
         aria-label="delete post"
         size="sm"
         onClick={() => {

@@ -124,7 +124,8 @@ export const Register: React.FC = ({}) => {
               <Button
                 ml="auto"
                 type="submit"
-                colorScheme="teal"
+                bg="primary"
+                color="snlightshades"
                 isLoading={isSubmitting}
               >
                 Register

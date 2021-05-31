@@ -21,12 +21,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <>
         <NextLink href="/login">
-          <Button color="white" variant="link" as={Link} mr={2}>
+          <Button color="snlightshades" variant="link" as={Link} mr={4}>
             Login
           </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button color="white" variant="link" as={Link} mr={2}>
+          <Button color="snlightshades" variant="link" as={Link}>
             Register
           </Button>
         </NextLink>
@@ -36,13 +36,17 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <Flex align="center">
         <Menu>
-          <MenuButton color="white" as={Button} rightIcon={<ChevronDownIcon />}>
+          <MenuButton
+            color="snlightshades"
+            as={Button}
+            rightIcon={<ChevronDownIcon />}
+          >
             {data.me.username}
           </MenuButton>
           <Portal>
-            <MenuList bg="#00db9a">
+            <MenuList bg="black">
               <MenuItem
-                color="white"
+                color="snlightshades"
                 onClick={async () => {
                   await logout();
                   await apolloClient.resetStore();
@@ -58,22 +62,28 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex zIndex={1} position="sticky" top={0} bg="#00db9a" p={4}>
+    <Flex zIndex={1} position="sticky" top={0} bg="black" p={4}>
       <Flex flex={1} align="center" m="auto" maxW={1050}>
         <Menu>
-          <MenuButton color="white" as={Button} rightIcon={<ChevronDownIcon />}>
+          <MenuButton
+            color="snlightshades"
+            as={Button}
+            rightIcon={<ChevronDownIcon />}
+          >
             theSquiggsNet
           </MenuButton>
           <Portal>
-            <MenuList bg="#00db9a">
+            <MenuList bg="black">
               <NextLink href="/">
-                <MenuItem color="white">Home</MenuItem>
+                <MenuItem color="snlightshades">Home</MenuItem>
               </NextLink>
               <NextLink href="/post/create">
-                <MenuItem color="white">Create Post</MenuItem>
+                <MenuItem color="snlightshades">
+                  &nbsp;&nbsp;&nbsp;&nbsp;Create Post
+                </MenuItem>
               </NextLink>
               <NextLink href="/flip-coin">
-                <MenuItem color="white"> Flip Coin</MenuItem>
+                <MenuItem color="snlightshades"> Flip Coin</MenuItem>
               </NextLink>
             </MenuList>
           </Portal>

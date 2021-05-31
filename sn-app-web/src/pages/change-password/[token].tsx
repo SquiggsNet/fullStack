@@ -117,7 +117,8 @@ if (response.data?.changePassword.errors) {
               <Button
                 mt={4}
                 type="submit"
-                colorScheme="teal"
+                bg="primary"
+                color="snlightshades"
                 isLoading={isSubmitting}
               >
                 Change Password

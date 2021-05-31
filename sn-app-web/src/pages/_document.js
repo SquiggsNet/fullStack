@@ -5,7 +5,11 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>theSquiggsNet</title>
+          <meta property="og:title" content="theSquiggsNet" key="title" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <body>
           {/* Make Color mode to persists when you refresh the page. */}
           <ColorModeScript />
@@ -13,6 +17,6 @@ export default class Document extends NextDocument {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

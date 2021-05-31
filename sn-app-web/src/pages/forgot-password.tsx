@@ -34,7 +34,8 @@ export const ForgotPassword: React.FC = ({}) => {
               <Button
                 mt={4}
                 type="submit"
-                colorScheme="teal"
+                bg="primary"
+                color="snlightshades"
                 isLoading={isSubmitting}
               >
                 Get Password Reset Email
