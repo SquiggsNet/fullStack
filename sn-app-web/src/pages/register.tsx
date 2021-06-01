@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
+import { Wrapper } from "../components/Wrapper";
 import { MeDocument, MeQuery, useRegisterMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { withApollo } from "../utils/withApollo";
@@ -74,66 +75,68 @@ export const Register: React.FC = ({}) => {
   };
   
   return (
-    <Layout color="snlightshades" variant="small">
-      <Formik
-        initialValues={initialValues}
-        validate={validate}
-        onSubmit={submitForm}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <InputField
-              label="Username"
-              name="username"
-              placeholder="Username"
-              isRequired
-            />
-            <Box mt={4}>
+    <Layout>
+      <Wrapper variant="small" color="sndarkaccent">
+        <Formik
+          initialValues={initialValues}
+          validate={validate}
+          onSubmit={submitForm}
+        >
+          {({ isSubmitting }) => (
+            <Form>
               <InputField
-                label="Email"
-                name="email"
-                placeholder="Email"
-                type="email"
+                label="Username"
+                name="username"
+                placeholder="Username"
                 isRequired
               />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                label="Password"
-                name="password"
-                placeholder="Password"
-                type="password"
-                isRequired
-              />
-            </Box>
-            <Box mt={4}>
-              <InputField
-                label="Confirm Password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                type="password"
-                isRequired
-              />
-            </Box>
-            <Box mt={2}>
-              <NextLink href="/forgot-password">
-                <Link color="snlightaccent">Forgot Password?</Link>
-              </NextLink>
-            </Box>
-            <Flex mt={4}>
-              <Button
-                ml="auto"
-                type="submit"
-                bg="primary"
-                color="snlightshades"
-                isLoading={isSubmitting}
-              >
-                Register
-              </Button>
-            </Flex>
-          </Form>
-        )}
-      </Formik>
+              <Box mt={4}>
+                <InputField
+                  label="Email"
+                  name="email"
+                  placeholder="Email"
+                  type="email"
+                  isRequired
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField
+                  label="Password"
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  isRequired
+                />
+              </Box>
+              <Box mt={4}>
+                <InputField
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  type="password"
+                  isRequired
+                />
+              </Box>
+              <Box mt={2}>
+                <NextLink href="/forgot-password">
+                  <Link color="snlightshades">Forgot Password?</Link>
+                </NextLink>
+              </Box>
+              <Flex mt={4}>
+                <Button
+                  ml="auto"
+                  type="submit"
+                  bg="primary"
+                  color="snlightshades"
+                  isLoading={isSubmitting}
+                >
+                  Register
+                </Button>
+              </Flex>
+            </Form>
+          )}
+        </Formik>
+      </Wrapper>
     </Layout>
   );
 };

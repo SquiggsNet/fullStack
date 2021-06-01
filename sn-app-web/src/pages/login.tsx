@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
+import { Wrapper } from "../components/Wrapper";
 import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import { withApollo } from "../utils/withApollo";
@@ -48,44 +49,46 @@ export const Login: React.FC = ({}) => {
   };
   
   return (
-    <Layout color="snlightshades" variant="small">
-      <Formik initialValues={initialValues} onSubmit={submitForm}>
-        {({ isSubmitting }) => (
-          <Form>
-            <InputField
-              label="Username / Email"
-              name="usernameOrEmail"
-              placeholder="Username Or Email"
-              isRequired
-            />
-            <Box mt={4}>
+    <Layout>
+      <Wrapper variant="small" color="sndarkaccent">
+        <Formik initialValues={initialValues} onSubmit={submitForm}>
+          {({ isSubmitting }) => (
+            <Form>
               <InputField
-                label="Password"
-                name="password"
-                placeholder="Password"
-                type="password"
+                label="Username / Email"
+                name="usernameOrEmail"
+                placeholder="Username Or Email"
                 isRequired
               />
-            </Box>
-            <Box mt={2}>
-              <NextLink href="/forgot-password">
-                <Link color="snlightaccent">Forgot Password?</Link>
-              </NextLink>
-            </Box>
-            <Flex mt={4}>
-              <Button
-                ml="auto"
-                type="submit"
-                bg="primary"
-                color="snlightshades"
-                isLoading={isSubmitting}
-              >
-                login
-              </Button>
-            </Flex>
-          </Form>
-        )}
-      </Formik>
+              <Box mt={4}>
+                <InputField
+                  label="Password"
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  isRequired
+                />
+              </Box>
+              <Box mt={2}>
+                <NextLink href="/forgot-password">
+                  <Link color="snlightshades">Forgot Password?</Link>
+                </NextLink>
+              </Box>
+              <Flex mt={4}>
+                <Button
+                  ml="auto"
+                  type="submit"
+                  bg="primary"
+                  color="snlightshades"
+                  isLoading={isSubmitting}
+                >
+                  login
+                </Button>
+              </Flex>
+            </Form>
+          )}
+        </Formik>
+      </Wrapper>
     </Layout>
   );
 };

@@ -80,7 +80,7 @@ if (response.data?.changePassword.errors) {
   return (
     <>
       <NavBar />
-      <Wrapper variant="small">
+      <Wrapper variant="small" color="sndarkaccent">
         <Formik
           initialValues={initialValues}
           validate={validate}

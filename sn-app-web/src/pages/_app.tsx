@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }: any) {
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
         options={{
-          initialColorMode: "dark",
+          initialColorMode: "light",
         }}
       >
         <Box bg="background" minWidth="min-content" minHeight="100vh">

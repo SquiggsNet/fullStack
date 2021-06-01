@@ -1,17 +1,22 @@
+import { Flex } from "@chakra-ui/react";
 import React from "react";
 import { NavBar } from "./NavBar";
-import { Wrapper, WrapperVariant } from "./Wrapper";
+import { SideBarLeft } from "./SideBarLeft";
+import { WrapperVariant } from "./Wrapper";
 
 interface LayoutProps {
   variant?: WrapperVariant;
   color?: string;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, variant, color }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <NavBar />
-      <Wrapper color={color} variant={variant}>{children}</Wrapper>
+      <Flex zIndex={1} position="sticky" top={0} m="auto" maxW={1400}>
+        <SideBarLeft />
+          {children}
+      </Flex>
     </>
   );
 };

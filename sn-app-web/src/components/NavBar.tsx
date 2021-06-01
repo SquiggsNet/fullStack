@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal, useColorMode } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
@@ -9,7 +9,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  // const { colorMode, toggleColorMode } = useColorMode();
   const [logout, { loading: logoutFecthing }] = useLogoutMutation();
   const apolloClient = useApolloClient();
   const { data, loading } = useMeQuery({
@@ -22,12 +22,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <>
         <NextLink href="/login">
-          <Button color="snlightshades" variant="link" as={Link} mr={4}>
+          <Button color="sndarkaccent" variant="link" as={Link} mr={4}>
             Login
           </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button color="snlightshades" variant="link" as={Link}>
+          <Button color="sndarkaccent" variant="link" as={Link}>
             Register
           </Button>
         </NextLink>
@@ -38,22 +38,19 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       <Flex align="center">
         <Menu>
           <MenuButton
-            color="snlightshades"
+            color="sndarkaccent"
             as={Button}
             rightIcon={<ChevronDownIcon />}
           >
             {data.me.username}
           </MenuButton>
           <Portal>
-            <MenuList bg="snmain">
-              <MenuItem
-                color="snlightshades"
-                onClick={toggleColorMode}
-              >
+            <MenuList bg="sndarkshades">
+              {/* <MenuItem color="sndarkaccent" onClick={toggleColorMode}>
                 Toggle {colorMode === "light" ? "Dark" : "Light"}
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem
-                color="snlightshades"
+                color="sndarkaccent"
                 onClick={async () => {
                   await logout();
                   await apolloClient.resetStore();
@@ -69,32 +66,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex zIndex={1} position="sticky" top={0} bg="snmain" p={4}>
-      <Flex flex={1} align="center" m="auto" maxW={1050}>
-        <Menu>
-          <MenuButton
-            color="snlightshades"
-            as={Button}
-            rightIcon={<ChevronDownIcon />}
-          >
-            theSquiggsNet
-          </MenuButton>
-          <Portal>
-            <MenuList bg="snmain">
-              <NextLink href="/">
-                <MenuItem color="snlightshades">Home</MenuItem>
-              </NextLink>
-              <NextLink href="/post/create">
-                <MenuItem color="snlightshades">
-                  &nbsp;&nbsp;&nbsp;&nbsp;Create Post
-                </MenuItem>
-              </NextLink>
-              <NextLink href="/flip-coin">
-                <MenuItem color="snlightshades"> Flip Coin</MenuItem>
-              </NextLink>
-            </MenuList>
-          </Portal>
-        </Menu>
+    <Flex zIndex={1} position="sticky" top={0}>
+      <Flex flex={1} align="center" m="auto" p={4} maxW={1400}>
+        <NextLink href="/">
+          <Button color="sndarkaccent" variant="gohst" >theSquiggsNet</Button>
+        </NextLink>
         <Box ml={"auto"}>{body}</Box>
       </Flex>
     </Flex>
