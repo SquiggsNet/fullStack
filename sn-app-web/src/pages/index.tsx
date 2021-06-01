@@ -33,8 +33,8 @@ const Index = () => {
   return (
     <>
       <Layout>
-        <Flex direction="column" p={4} top={0} grow={1}>
-          <Wrapper>
+        <Flex direction="column" top={0} grow={1}>
+          <Wrapper variant="medium">
             <Box overflow="auto">
               {!data && loading ? (
                 <>
@@ -47,10 +47,11 @@ const Index = () => {
                       !p ? null : (
                         <Flex
                           bg="sndarkaccent"
+                          color="snlightshades"
                           key={p.id}
                           p={5}
                           shadow="md"
-                          borderWidth="1px"
+                          borderRadius={18}
                         >
                           <UpvoteSection post={p} />
                           <Box flex={1}>
@@ -59,7 +60,9 @@ const Index = () => {
                                 <Heading> {p.title}</Heading>
                               </Link>
                             </NextLink>
-                            <Text>Posted by {p.creator.username}</Text>
+                            <Text color="snmain">
+                              Posted by {p.creator.username}
+                            </Text>
                             <Flex align="center">
                               <Text flex={1} mt={4}>
                                 {truncate(p.textSnippet)}

@@ -43,38 +43,40 @@ export const EditPost: React.FC<{}> = ({}) => {
 
   return (
     <Layout color="snlightshades" variant="small">
-      <Wrapper variant="small" color="sndarkaccent">
-        <Formik
-          initialValues={{ title: data.post.title, text: data.post.text }}
-          onSubmit={async (values) => {
-            const { errors } = await updatePost({
-              variables: { id: intId, ...values },
-            });
-            if (!errors) {
-              router.back();
-            }
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <InputField label="Title" name="title" placeholder="title" />
-              <Box mt={4}>
-                <InputField label="Body" name="text" placeholder="body" />
-              </Box>
-              <Flex mt={4}>
-                <Button
-                  ml="auto"
-                  type="submit"
-                  bg="primary"
-                  color="snlightshades"
-                  isLoading={isSubmitting}
-                >
-                  Update post
-                </Button>
-              </Flex>
-            </Form>
-          )}
-        </Formik>
+      <Wrapper variant="small" color="snlightshades">
+        <Box  bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+          <Formik
+            initialValues={{ title: data.post.title, text: data.post.text }}
+            onSubmit={async (values) => {
+              const { errors } = await updatePost({
+                variables: { id: intId, ...values },
+              });
+              if (!errors) {
+                router.back();
+              }
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <InputField label="Title" name="title" placeholder="title" />
+                <Box mt={4}>
+                  <InputField label="Body" name="text" placeholder="body" />
+                </Box>
+                <Flex mt={4}>
+                  <Button
+                    ml="auto"
+                    type="submit"
+                    bg="primary"
+                    color="snlightshades"
+                    isLoading={isSubmitting}
+                  >
+                    Update post
+                  </Button>
+                </Flex>
+              </Form>
+            )}
+          </Formik>
+        </Box>
       </Wrapper>
     </Layout>
   );

@@ -50,44 +50,46 @@ export const Login: React.FC = ({}) => {
   
   return (
     <Layout>
-      <Wrapper variant="small" color="sndarkaccent">
-        <Formik initialValues={initialValues} onSubmit={submitForm}>
-          {({ isSubmitting }) => (
-            <Form>
-              <InputField
-                label="Username / Email"
-                name="usernameOrEmail"
-                placeholder="Username Or Email"
-                isRequired
-              />
-              <Box mt={4}>
+      <Wrapper variant="small">
+        <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+          <Formik initialValues={initialValues} onSubmit={submitForm}>
+            {({ isSubmitting }) => (
+              <Form>
                 <InputField
-                  label="Password"
-                  name="password"
-                  placeholder="Password"
-                  type="password"
+                  label="Username / Email"
+                  name="usernameOrEmail"
+                  placeholder="Username Or Email"
                   isRequired
                 />
-              </Box>
-              <Box mt={2}>
-                <NextLink href="/forgot-password">
-                  <Link color="snlightshades">Forgot Password?</Link>
-                </NextLink>
-              </Box>
-              <Flex mt={4}>
-                <Button
-                  ml="auto"
-                  type="submit"
-                  bg="primary"
-                  color="snlightshades"
-                  isLoading={isSubmitting}
-                >
-                  login
-                </Button>
-              </Flex>
-            </Form>
-          )}
-        </Formik>
+                <Box mt={4}>
+                  <InputField
+                    label="Password"
+                    name="password"
+                    placeholder="Password"
+                    type="password"
+                    isRequired
+                  />
+                </Box>
+                <Box mt={2}>
+                  <NextLink href="/forgot-password">
+                    <Link color="snlightaccent">Forgot Password?</Link>
+                  </NextLink>
+                </Box>
+                <Flex mt={4}>
+                  <Button
+                    ml="auto"
+                    type="submit"
+                    bg="primary"
+                    color="snlightshades"
+                    isLoading={isSubmitting}
+                  >
+                    login
+                  </Button>
+                </Flex>
+              </Form>
+            )}
+          </Formik>
+        </Box>
       </Wrapper>
     </Layout>
   );

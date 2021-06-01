@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal } from "@chakra-ui/react";
 import React from "react";
+import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
@@ -11,6 +12,7 @@ interface NavBarProps {}
 export const NavBar: React.FC<NavBarProps> = ({}) => {
   // const { colorMode, toggleColorMode } = useColorMode();
   const [logout, { loading: logoutFecthing }] = useLogoutMutation();
+  const router = useRouter();
   const apolloClient = useApolloClient();
   const { data, loading } = useMeQuery({
     skip: isServer(),
@@ -22,12 +24,29 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <>
         <NextLink href="/login">
-          <Button color="sndarkaccent" variant="link" as={Link} mr={4}>
+          <Button
+            color={
+              router.pathname.includes("/login") ? "primary" : "sndarkshades"
+            }
+            variant="link"
+            fontSize="xl"
+            as={Link}
+            mr={4}
+          >
             Login
           </Button>
         </NextLink>
         <NextLink href="/register">
-          <Button color="sndarkaccent" variant="link" as={Link}>
+          <Button
+            color={
+              router.pathname.includes("/register")
+                ? "primary"
+                : "sndarkshades"
+            }
+            variant="link"
+            fontSize="xl"
+            as={Link}
+          >
             Register
           </Button>
         </NextLink>
@@ -38,19 +57,20 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       <Flex align="center">
         <Menu>
           <MenuButton
-            color="sndarkaccent"
+            color="sndarkshades"
             as={Button}
+            fontSize="xl"
             rightIcon={<ChevronDownIcon />}
           >
             {data.me.username}
           </MenuButton>
           <Portal>
-            <MenuList bg="sndarkshades">
+            <MenuList bg="snlightshades">
               {/* <MenuItem color="sndarkaccent" onClick={toggleColorMode}>
                 Toggle {colorMode === "light" ? "Dark" : "Light"}
               </MenuItem> */}
               <MenuItem
-                color="sndarkaccent"
+                color="sndarkshades"
                 onClick={async () => {
                   await logout();
                   await apolloClient.resetStore();
@@ -69,7 +89,13 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     <Flex zIndex={1} position="sticky" top={0}>
       <Flex flex={1} align="center" m="auto" p={4} maxW={1400}>
         <NextLink href="/">
-          <Button color="sndarkaccent" variant="gohst" >theSquiggsNet</Button>
+          <Button
+            color="sndarkshades"
+            variant="gohst"
+            fontSize="xl"
+          >
+            theSquiggsNet
+          </Button>
         </NextLink>
         <Box ml={"auto"}>{body}</Box>
       </Flex>

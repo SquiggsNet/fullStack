@@ -67,6 +67,7 @@ export const UpvoteSection: React.FC<UpvoteSectionProps> = ({ post }) => {
         color={post.voteStatus !== 1 ? "success" : "snlightshades"}
         aria-label="upvote post"
         size="sm"
+        fontSize="x-large"
         isLoading={loadingState === "upvote-loading"}
         onClick={async () => {
           if (post.voteStatus === 1) {
@@ -90,6 +91,7 @@ export const UpvoteSection: React.FC<UpvoteSectionProps> = ({ post }) => {
         color={post.voteStatus !== -1 ? "danger" : "snlightshades"}
         aria-label="downvote post"
         size="sm"
+        fontSize="x-large"
         isLoading={loadingState === "downvote-loading"}
         onClick={async () => {
           if (post.voteStatus === -1) {

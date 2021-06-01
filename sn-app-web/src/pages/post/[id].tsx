@@ -27,13 +27,15 @@ const Post = ({}) => {
 
   return (
     <Layout>
-      <Wrapper variant="small" color="sndarkaccent">
-        <Heading mb={4}>{data.post.title}</Heading>
-        <Box mb={4}>{data.post.text}</Box>
-        <EditDeletePostButtons
-          id={data.post.id}
-          creatorId={data.post.creator.id}
-        />
+      <Wrapper variant="medium">
+        <Box  bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+          <Heading mb={4}>{data.post.title}</Heading>
+          <Box mb={4}>{data.post.text}</Box>
+          <EditDeletePostButtons
+            id={data.post.id}
+            creatorId={data.post.creator.id}
+          />
+        </Box>
       </Wrapper>
     </Layout>
   );

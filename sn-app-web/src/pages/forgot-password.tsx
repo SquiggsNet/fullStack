@@ -13,39 +13,46 @@ export const ForgotPassword: React.FC = ({}) => {
 
   return (
     <Layout>
-      <Wrapper variant="small" color="sndarkaccent">
-        <Formik
-          initialValues={{ email: "" }}
-          onSubmit={async (values) => {
-            await fogotPassword({ variables: values });
-            setComplete(true);
-          }}
+      <Wrapper variant="small" color="snlightshades">
+        <Box
+          bg="sndarkaccent"
+          color="snlightshades"
+          borderRadius={18}
+          p={5}
         >
-          {({ isSubmitting }) =>
-            complete ? (
-              <Box>An email has been sent to this account</Box>
-            ) : (
-              <Form>
-                <InputField
-                  label="Email"
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                  isRequired
-                />
-                <Button
-                  mt={4}
-                  type="submit"
-                  bg="primary"
-                  color="snlightshades"
-                  isLoading={isSubmitting}
-                >
-                  Get Password Reset Email
-                </Button>
-              </Form>
-            )
-          }
-        </Formik>
+          <Formik
+            initialValues={{ email: "" }}
+            onSubmit={async (values) => {
+              await fogotPassword({ variables: values });
+              setComplete(true);
+            }}
+          >
+            {({ isSubmitting }) =>
+              complete ? (
+                <Box>An email has been sent to this account</Box>
+              ) : (
+                <Form>
+                  <InputField
+                    label="Email"
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    isRequired
+                  />
+                  <Button
+                    mt={4}
+                    type="submit"
+                    bg="primary"
+                    color="snlightshades"
+                    isLoading={isSubmitting}
+                  >
+                    Get Password Reset Email
+                  </Button>
+                </Form>
+              )
+            }
+          </Formik>
+        </Box>
       </Wrapper>
     </Layout>
   );

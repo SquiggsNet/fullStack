@@ -80,52 +80,54 @@ if (response.data?.changePassword.errors) {
   return (
     <>
       <NavBar />
-      <Wrapper variant="small" color="sndarkaccent">
-        <Formik
-          initialValues={initialValues}
-          validate={validate}
-          onSubmit={submitForm}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <Box mt={4}>
-                <InputField
-                  label="New Password"
-                  name="newPassword"
-                  placeholder="New Password"
-                  type="password"
-                  required
-                />
-              </Box>
-              <Box mt={4}>
-                <InputField
-                  label="Confirm Password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  type="password"
-                  required
-                />
-              </Box>
-              {tokenError ? (
-                <Box>
-                  <Box color="red">{tokenError}</Box>
-                  <NextLink href="/forgot-password">
-                    <Link>Click here to request new link</Link>
-                  </NextLink>
+      <Wrapper variant="small">
+        <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+          <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={submitForm}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <Box mt={4}>
+                  <InputField
+                    label="New Password"
+                    name="newPassword"
+                    placeholder="New Password"
+                    type="password"
+                    required
+                  />
                 </Box>
-              ) : null}
-              <Button
-                mt={4}
-                type="submit"
-                bg="primary"
-                color="snlightshades"
-                isLoading={isSubmitting}
-              >
-                Change Password
-              </Button>
-            </Form>
-          )}
-        </Formik>
+                <Box mt={4}>
+                  <InputField
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    type="password"
+                    required
+                  />
+                </Box>
+                {tokenError ? (
+                  <Box>
+                    <Box color="red">{tokenError}</Box>
+                    <NextLink href="/forgot-password">
+                      <Link>Click here to request new link</Link>
+                    </NextLink>
+                  </Box>
+                ) : null}
+                <Button
+                  mt={4}
+                  type="submit"
+                  bg="primary"
+                  color="snlightshades"
+                  isLoading={isSubmitting}
+                >
+                  Change Password
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </Box>
       </Wrapper>
     </>
   );
