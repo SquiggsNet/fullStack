@@ -8,9 +8,8 @@ interface SideBarLeftProps {}
 
 export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
   const router = useRouter();
-  console.log('router: ', router);
   return (
-    <Flex direction="column" maxW={200} p={4}>
+    <Flex direction="column" maxW={300} p={4}>
       <NextLink href="/">
         <Button
           leftIcon={<ChatIcon />}

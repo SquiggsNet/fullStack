@@ -13,7 +13,7 @@ export const ForgotPassword: React.FC = ({}) => {
 
   return (
     <Layout>
-      <Wrapper variant="small" color="snlightshades">
+      <Wrapper variant="small">
         <Box
           bg="sndarkaccent"
           color="snlightshades"

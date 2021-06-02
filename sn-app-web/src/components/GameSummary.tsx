@@ -1,85 +1,44 @@
-import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
-
-interface UserInfo {
-  name: string;
-  currentRun: number;
-  AllTimeRun: number;
-};
+import { Box, Text } from "@chakra-ui/layout";
+import { Divider, Flex } from "@chakra-ui/react";
+import React from "react";
 
 interface Props {
-  userInfo: UserInfo;
+  username: string;
   currentRun: number;
   bestRun: number;
   lastRuns: string[];
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      marginBottom: 15
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  }),
-);
-
-
-export const GameSummary: React.FC<Props> = ({ userInfo, currentRun, bestRun, lastRuns }) => {
-  const classes = useStyles();
-
+export const GameSummary: React.FC<Props> = ({
+  username,
+  currentRun,
+  bestRun,
+  lastRuns,
+}) => {
   return (
-    <Card className={classes.root}> 
-      <CardContent>
-        <Grid
-          container
-          // direction="row"
-          // justify="center"
-          // alignItems="flex-start"
-          spacing={3}
-        >
-          <Grid item xs={7}>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-              {userInfo.name}
-            </Typography>
-            <Typography variant="body2" component="p">
-              Current Run: {currentRun}
-            </Typography>
-            <Typography variant="body2" component="p">
-              All Time Best: {bestRun}
-            </Typography>
-          </Grid>
-
-          <Grid item xs={5}>
-            <TableContainer component={Paper}>
-              <Table aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Last 5 Flips</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {lastRuns && lastRuns.map((run, index) => (
-                    <TableRow key={`${run}-${index}`}>
-                      <TableCell align="center">
-                        {run}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <Box borderRadius={18} p={4} bg="sndarkaccent">
+      <Flex justifyContent="space-between" color="snlightaccent">
+        User:
+        <Text color="snmain">{username}</Text>
+      </Flex>
+      <Flex justifyContent="space-between" color="snlightaccent">
+        Current Run:
+        <Text color="snlightshades">{currentRun}</Text>
+      </Flex>
+      <Flex justifyContent="space-between" color="snlightaccent">
+        Best Run:
+        <Text color="snlightshades">{bestRun}</Text>
+      </Flex>
+      <Divider mt={5} mb={5} color="snlightaccent" />
+      <Flex color="snlightaccent">Last 5 Runs:</Flex>
+      <Flex justifyContent="space-between" color="snlightaccent">
+        {lastRuns &&
+          lastRuns.map((run, index) => (
+            <Text key={`${run}-${index}`} color="snlightshades">
+              {run}
+            </Text>
+          ))}
+      </Flex>
+    </Box>
   );
 };

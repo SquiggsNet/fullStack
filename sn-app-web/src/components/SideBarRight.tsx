@@ -8,7 +8,7 @@ interface SideBarRightProps {}
 export const SideBarRight: React.FC<SideBarRightProps> = () => {
   return (
     <>
-      <Flex direction="column" p={4} maxW={450}>
+      <Flex direction="column" p={4} maxW={300}>
         <Box borderRadius={18} p={4} bg="sndarkaccent">
           <NextLink href="/post/create">
             <Button
