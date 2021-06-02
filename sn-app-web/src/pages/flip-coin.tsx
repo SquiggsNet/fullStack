@@ -2,7 +2,6 @@ import { Flex } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { GameScreenCoinFlip } from '../components/GameScreenCoinFlip';
 import { GameSummary } from '../components/GameSummary';
-// import { HighScoresList } from '../components/HighScoresList';
 import { Layout } from '../components/Layout';
 import { Wrapper } from '../components/Wrapper';
 import { useMeQuery } from '../generated/graphql';
@@ -65,7 +64,6 @@ export const FlipCoin: React.FC = ({}) => {
           currentRun={currentRun}
           lastRuns={lastTenRuns}
         />
-        {/* <HighScoresList scores={highScores} /> */}
       </Flex>
     </Layout>
   );
