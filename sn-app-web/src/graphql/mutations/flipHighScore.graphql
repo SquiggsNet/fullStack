@@ -1,0 +1,5 @@
+mutation FlipHighScore($value: Int!) {
+  flipHighScore(value: $value) {
+    ...BaseUserResponse
+  }
+}

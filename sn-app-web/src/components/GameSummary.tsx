@@ -5,8 +5,9 @@ import React from "react";
 interface Props {
   username: string;
   currentRun: number;
-  bestRun: number;
+  bestRun?: number;
   lastRuns: string[];
+  lastFlip: boolean;
 }
 
 export const GameSummary: React.FC<Props> = ({
@@ -14,6 +15,7 @@ export const GameSummary: React.FC<Props> = ({
   currentRun,
   bestRun,
   lastRuns,
+  lastFlip,
 }) => {
   return (
     // bg color
@@ -24,14 +26,16 @@ export const GameSummary: React.FC<Props> = ({
       </Flex>
       <Flex justifyContent="space-between">
         <Text color="snlightaccent">Current Run:</Text>
-        <Text>{currentRun}</Text>
+        <Text color={lastFlip ? "success" : "danger"}>{currentRun}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text color="snlightaccent">Best Run:</Text>
-        <Text>{bestRun}</Text>
+        <Text color="warning">
+          {bestRun || bestRun === 0 ? bestRun : username}
+        </Text>
       </Flex>
       <Divider mt={5} mb={5} />
-      <Flex color="snlightaccent">Last 5 Runs:</Flex>
+      <Flex color="snlightaccent">Last 5 Flips:</Flex>
       <Flex justifyContent="space-between">
         {lastRuns &&
           lastRuns.map((run, index) => (

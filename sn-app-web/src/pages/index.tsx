@@ -35,7 +35,7 @@ const Index = () => {
       <Layout>
         <Flex direction="column" top={0} grow={1}>
           <Wrapper variant="medium">
-            <Box overflow="auto">
+            <Box pb={12} overflow="auto">
               {!data && loading ? (
                 <>
                   <div>loading...</div>

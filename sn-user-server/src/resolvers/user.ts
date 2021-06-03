@@ -3,6 +3,7 @@ import { MyContext } from "../types";
 import {
   Arg,
   Ctx,
+  Int,
   Field,
   FieldResolver,
   Mutation,
@@ -10,6 +11,7 @@ import {
   Query,
   Resolver,
   Root,
+  UseMiddleware,
 } from "type-graphql";
 import argon2 from "argon2";
 import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from "../constants";
@@ -18,6 +20,7 @@ import { validatePassowrd, validateRegister } from "../utils/validateRegister";
 import { sendEmail } from "../utils/sendEmail";
 import { v4 } from "uuid";
 import { getConnection } from "typeorm";
+import { isAuth } from "../middleware/isAuth";
 
 @ObjectType()
 class FieldError {
@@ -58,6 +61,24 @@ export class UserResolver {
     // fallback if not current user
     return "";
   }
+
+  @Mutation(() => UserResponse)
+  @UseMiddleware(isAuth)
+  async flipHighScore(
+    @Arg("value", () => Int) value: number,
+    @Ctx() { req }: MyContext
+  ): Promise<UserResponse> {
+    const { userId } = req.session;
+    await User.update(
+      { id: userId },
+      {
+        scoreFlip: value,
+      }
+    );
+    const user = await User.findOne(userId);
+    return { user };
+  }
+
   @Mutation(() => UserResponse)
   async changePassword(
     @Arg("token") token: string,
@@ -156,17 +177,16 @@ export class UserResolver {
       user = result.raw[0];
     } catch (error) {
       if (error.code === "23505") {
-        if (error.detail.includes('username')) {
+        if (error.detail.includes("username")) {
           return {
             errors: [
               {
                 field: "username",
                 message: "username already exists",
-              }
+              },
             ],
           };
-        }
-        else if (error.detail.includes("email")) {
+        } else if (error.detail.includes("email")) {
           return {
             errors: [
               {

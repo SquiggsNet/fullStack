@@ -39,7 +39,12 @@ export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip,
       </Flex>
       <Divider mt={5} mb={5} />
       <Flex justifyContent="space-around">
-        <Button bg="primary" isFullWidth={true} onClick={async () => setCoin()}>
+        <Button
+          bg="primary"
+          disabled={!selection}
+          isFullWidth={true}
+          onClick={async () => setCoin()}
+        >
           Flip
         </Button>
       </Flex>

@@ -26,6 +26,7 @@ export type Mutation = {
   createPost: Post;
   updatePost?: Maybe<Post>;
   deletePost: Scalars['Boolean'];
+  flipHighScore: UserResponse;
   changePassword: UserResponse;
   forgotPassword: Scalars['Boolean'];
   register: UserResponse;
@@ -54,6 +55,11 @@ export type MutationUpdatePostArgs = {
 
 export type MutationDeletePostArgs = {
   id: Scalars['Int'];
+};
+
+
+export type MutationFlipHighScoreArgs = {
+  value: Scalars['Int'];
 };
 
 
@@ -137,6 +143,7 @@ export type User = {
   id: Scalars['Int'];
   username: Scalars['String'];
   email: Scalars['String'];
+  scoreFlip: Scalars['Float'];
   upvotes: Array<Upvote>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
@@ -170,7 +177,7 @@ export type BaseErrorFragment = (
 
 export type BaseUserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'username'>
+  & Pick<User, 'id' | 'username' | 'scoreFlip'>
 );
 
 export type BaseUserResponseFragment = (
@@ -219,6 +226,19 @@ export type DeletePostMutationVariables = Exact<{
 export type DeletePostMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'deletePost'>
+);
+
+export type FlipHighScoreMutationVariables = Exact<{
+  value: Scalars['Int'];
+}>;
+
+
+export type FlipHighScoreMutation = (
+  { __typename?: 'Mutation' }
+  & { flipHighScore: (
+    { __typename?: 'UserResponse' }
+    & BaseUserResponseFragment
+  ) }
 );
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -363,6 +383,7 @@ export const BaseUserFragmentDoc = gql`
     fragment BaseUser on User {
   id
   username
+  scoreFlip
 }
     `;
 export const BaseUserResponseFragmentDoc = gql`
@@ -480,6 +501,39 @@ export function useDeletePostMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeletePostMutationHookResult = ReturnType<typeof useDeletePostMutation>;
 export type DeletePostMutationResult = Apollo.MutationResult<DeletePostMutation>;
 export type DeletePostMutationOptions = Apollo.BaseMutationOptions<DeletePostMutation, DeletePostMutationVariables>;
+export const FlipHighScoreDocument = gql`
+    mutation FlipHighScore($value: Int!) {
+  flipHighScore(value: $value) {
+    ...BaseUserResponse
+  }
+}
+    ${BaseUserResponseFragmentDoc}`;
+export type FlipHighScoreMutationFn = Apollo.MutationFunction<FlipHighScoreMutation, FlipHighScoreMutationVariables>;
+
+/**
+ * __useFlipHighScoreMutation__
+ *
+ * To run a mutation, you first call `useFlipHighScoreMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useFlipHighScoreMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [flipHighScoreMutation, { data, loading, error }] = useFlipHighScoreMutation({
+ *   variables: {
+ *      value: // value for 'value'
+ *   },
+ * });
+ */
+export function useFlipHighScoreMutation(baseOptions?: Apollo.MutationHookOptions<FlipHighScoreMutation, FlipHighScoreMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<FlipHighScoreMutation, FlipHighScoreMutationVariables>(FlipHighScoreDocument, options);
+      }
+export type FlipHighScoreMutationHookResult = ReturnType<typeof useFlipHighScoreMutation>;
+export type FlipHighScoreMutationResult = Apollo.MutationResult<FlipHighScoreMutation>;
+export type FlipHighScoreMutationOptions = Apollo.BaseMutationOptions<FlipHighScoreMutation, FlipHighScoreMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)

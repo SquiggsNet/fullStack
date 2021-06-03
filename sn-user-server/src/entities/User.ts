@@ -29,6 +29,10 @@ export class User extends BaseEntity {
   @Column()
   password!: string;
 
+  @Field()
+  @Column({ type: "int", default: 0 })
+  scoreFlip!: number;
+
   @OneToMany(() => Post, (post) => post.creator)
   posts: Post[];
 
