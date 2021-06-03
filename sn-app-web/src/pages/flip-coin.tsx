@@ -1,10 +1,11 @@
 import { Flex } from '@chakra-ui/react';
 import React, { useState } from 'react'
+import { GameHighScores } from '../components/GameHighScores';
 import { GameScreenCoinFlip } from '../components/GameScreenCoinFlip';
 import { GameSummary } from '../components/GameSummary';
 import { Layout } from '../components/Layout';
 import { Wrapper } from '../components/Wrapper';
-import { MeDocument, MeQuery, useFlipHighScoreMutation, useMeQuery } from '../generated/graphql';
+import { MeDocument, MeQuery, useFlipHighScoreMutation, useFlipHighScoresQuery, useMeQuery } from '../generated/graphql';
 import { withApollo } from "../utils/withApollo";
 
 const coinLookUp = ["H", "T"];
@@ -15,6 +16,12 @@ const getRandomNumber = (max: number, min: number) => {
 
 export const FlipCoin: React.FC = ({}) => {
   const { data } = useMeQuery();
+  const { data: highScores } = useFlipHighScoresQuery({
+    variables: {
+      limit: 5,
+    },
+    notifyOnNetworkStatusChange: true,
+  });
   const [flipHighScore] = useFlipHighScoreMutation();
   const [coin, setCoin] = useState<string | null>(null);
   const [selection, setSelection] = useState<string | null>(null);
@@ -84,6 +91,13 @@ export const FlipCoin: React.FC = ({}) => {
           lastFlip={lastFlip}
           currentRun={currentRun}
           lastRuns={lastTenRuns}
+        />
+        <GameHighScores
+          highScores={
+            highScores?.flipHighScores.scores
+              ? highScores?.flipHighScores.scores
+              : []
+          }
         />
       </Flex>
     </Layout>

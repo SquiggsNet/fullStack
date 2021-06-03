@@ -50,6 +50,20 @@ class UserResponse {
   user?: User;
 }
 
+@ObjectType()
+class UserFlipScore {
+  @Field()
+  username: string;
+  @Field()
+  scoreFlip: number;
+}
+
+@ObjectType()
+class UserFlipScores {
+  @Field(() => [UserFlipScore])
+  scores: UserFlipScore[];
+}
+
 @Resolver(User)
 export class UserResolver {
   @FieldResolver(() => String)
@@ -60,6 +74,24 @@ export class UserResolver {
     }
     // fallback if not current user
     return "";
+  }
+
+  @Query(() => UserFlipScores)
+  async flipHighScores(
+    @Arg("limit", () => Int) limit: number,
+  ): Promise<UserFlipScores> {
+    const realLimit = Math.min(50, limit);
+    const scores = await getConnection().query(
+      `
+    SELECT "user".username, "user"."scoreFlip"
+    FROM "user"
+    ORDER BY "user"."scoreFlip" DESC
+    limit $1
+    `,
+      [realLimit]
+    );
+    console.log("dem scores", scores);
+    return { scores };
   }
 
   @Mutation(() => UserResponse)

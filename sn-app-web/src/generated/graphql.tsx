@@ -115,6 +115,7 @@ export type Query = {
   hello: Scalars['String'];
   posts: PaginatedPosts;
   post?: Maybe<Post>;
+  flipHighScores: UserFlipScores;
   me?: Maybe<User>;
 };
 
@@ -127,6 +128,11 @@ export type QueryPostsArgs = {
 
 export type QueryPostArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QueryFlipHighScoresArgs = {
+  limit: Scalars['Int'];
 };
 
 export type Upvote = {
@@ -147,6 +153,17 @@ export type User = {
   upvotes: Array<Upvote>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
+};
+
+export type UserFlipScore = {
+  __typename?: 'UserFlipScore';
+  username: Scalars['String'];
+  scoreFlip: Scalars['Float'];
+};
+
+export type UserFlipScores = {
+  __typename?: 'UserFlipScores';
+  scores: Array<UserFlipScore>;
 };
 
 export type UserResponse = {
@@ -310,6 +327,22 @@ export type VoteMutationVariables = Exact<{
 export type VoteMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'vote'>
+);
+
+export type FlipHighScoresQueryVariables = Exact<{
+  limit: Scalars['Int'];
+}>;
+
+
+export type FlipHighScoresQuery = (
+  { __typename?: 'Query' }
+  & { flipHighScores: (
+    { __typename?: 'UserFlipScores' }
+    & { scores: Array<(
+      { __typename?: 'UserFlipScore' }
+      & Pick<UserFlipScore, 'scoreFlip' | 'username'>
+    )> }
+  ) }
 );
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -732,6 +765,44 @@ export function useVoteMutation(baseOptions?: Apollo.MutationHookOptions<VoteMut
 export type VoteMutationHookResult = ReturnType<typeof useVoteMutation>;
 export type VoteMutationResult = Apollo.MutationResult<VoteMutation>;
 export type VoteMutationOptions = Apollo.BaseMutationOptions<VoteMutation, VoteMutationVariables>;
+export const FlipHighScoresDocument = gql`
+    query FlipHighScores($limit: Int!) {
+  flipHighScores(limit: $limit) {
+    scores {
+      scoreFlip
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useFlipHighScoresQuery__
+ *
+ * To run a query within a React component, call `useFlipHighScoresQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFlipHighScoresQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFlipHighScoresQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useFlipHighScoresQuery(baseOptions: Apollo.QueryHookOptions<FlipHighScoresQuery, FlipHighScoresQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FlipHighScoresQuery, FlipHighScoresQueryVariables>(FlipHighScoresDocument, options);
+      }
+export function useFlipHighScoresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FlipHighScoresQuery, FlipHighScoresQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FlipHighScoresQuery, FlipHighScoresQueryVariables>(FlipHighScoresDocument, options);
+        }
+export type FlipHighScoresQueryHookResult = ReturnType<typeof useFlipHighScoresQuery>;
+export type FlipHighScoresLazyQueryHookResult = ReturnType<typeof useFlipHighScoresLazyQuery>;
+export type FlipHighScoresQueryResult = Apollo.QueryResult<FlipHighScoresQuery, FlipHighScoresQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {

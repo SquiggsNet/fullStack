@@ -1,0 +1,8 @@
+query FlipHighScores($limit: Int!) {
+  flipHighScores(limit: $limit) {
+    scores {
+      scoreFlip
+      username
+    }
+  }
+}
