@@ -15,8 +15,7 @@ export const ForgotPassword: React.FC = ({}) => {
     <Layout>
       <Wrapper variant="small">
         <Box
-          bg="sndarkaccent"
-          color="snlightshades"
+          // br color
           borderRadius={18}
           p={5}
         >
@@ -43,7 +42,6 @@ export const ForgotPassword: React.FC = ({}) => {
                     mt={4}
                     type="submit"
                     bg="primary"
-                    color="snlightshades"
                     isLoading={isSubmitting}
                   >
                     Get Password Reset Email

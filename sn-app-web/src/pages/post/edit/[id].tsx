@@ -27,7 +27,7 @@ export const EditPost: React.FC<{}> = ({}) => {
 
   if (loading) {
     return (
-      <Layout color="snlightshades">
+      <Layout>
         <Box>loading...</Box>
       </Layout>
     );
@@ -35,16 +35,17 @@ export const EditPost: React.FC<{}> = ({}) => {
 
   if (!data?.post) {
     return (
-      <Layout color="snlightshades">
+      <Layout>
         <Box>loading...</Box>
       </Layout>
     );
   }
 
   return (
-    <Layout color="snlightshades" variant="small">
-      <Wrapper variant="small" color="snlightshades">
-        <Box  bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+    <Layout>
+      <Wrapper variant="small">
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Formik
             initialValues={{ title: data.post.title, text: data.post.text }}
             onSubmit={async (values) => {
@@ -67,7 +68,6 @@ export const EditPost: React.FC<{}> = ({}) => {
                     ml="auto"
                     type="submit"
                     bg="primary"
-                    color="snlightshades"
                     isLoading={isSubmitting}
                   >
                     Update post

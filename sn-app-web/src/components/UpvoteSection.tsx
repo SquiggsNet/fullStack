@@ -63,8 +63,8 @@ export const UpvoteSection: React.FC<UpvoteSectionProps> = ({ post }) => {
   return (
     <Flex direction="column" alignItems="center" justifyContent="center" mr={4}>
       <IconButton
-        bg={post.voteStatus !== 1 ? "snlightshades" : "success"}
-        color={post.voteStatus !== 1 ? "success" : "snlightshades"}
+        bg={post.voteStatus !== 1 ? undefined : "success"}
+        color={post.voteStatus !== 1 ? "success" : undefined}
         aria-label="upvote post"
         size="sm"
         fontSize="x-large"
@@ -87,8 +87,8 @@ export const UpvoteSection: React.FC<UpvoteSectionProps> = ({ post }) => {
       />
       {post.points}
       <IconButton
-        bg={post.voteStatus !== -1 ? "snlightshades" : "danger"}
-        color={post.voteStatus !== -1 ? "danger" : "snlightshades"}
+        bg={post.voteStatus !== -1 ? undefined : "danger"}
+        color={post.voteStatus !== -1 ? "danger" : undefined}
         aria-label="downvote post"
         size="sm"
         fontSize="x-large"

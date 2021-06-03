@@ -1,5 +1,5 @@
-import { extendTheme } from '@chakra-ui/react'
-import { createBreakpoints } from '@chakra-ui/theme-tools'
+import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import { createBreakpoints, mode } from '@chakra-ui/theme-tools'
 
 const fonts = {
   color: "#111331",
@@ -13,12 +13,17 @@ const breakpoints = createBreakpoints({
   xl: '80em',
 })
 
+const config: ThemeConfig = {
+  initialColorMode: "dark",
+  useSystemColorMode: false,
+};
+
 const theme = extendTheme({
+  config,
   colors: {
     black: "#191919",
     white: "#ffffff",
 
-    // background: "#62908B",
     // snlightshades: "#FAFBFA",
     // snlightaccent: "#A5A5A8",
     // snmain: "#DDA06E",
@@ -26,7 +31,6 @@ const theme = extendTheme({
     // sndarkshades: "#62908B",
     // primary: "#DDA06E",
 
-    background: "#F4F6F5",
     snlightshades: "#F4F6F5",
     snlightaccent: "#8FA494",
     snmain: "#5DB65E",
@@ -35,7 +39,6 @@ const theme = extendTheme({
     primary: "#5DB65E",
     secondary: "#999999",
 
-    // background: "#111331",
     // snlightshades: "#F9FAF6",
     // snlightaccent: "#4499D8",
     // snmain: "#6C4B8C",
@@ -47,6 +50,16 @@ const theme = extendTheme({
     success: "#51b154",
     warning: "#cea11c",
     danger: "#f44336",
+  },
+  styles: {
+    global: (props: any) => ({
+      body: {
+        color:
+          props.colorMode === "dark" ? "snlightshades" : "sndarkshades",
+        backgroundColor:
+          props.colorMode === "dark" ? "sndarkshades" : "snlightshades",
+      },
+    }),
   },
   fonts,
   breakpoints,

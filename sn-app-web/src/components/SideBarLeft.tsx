@@ -16,7 +16,7 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
           color={
             router.pathname === "/" || router.pathname.includes("/post")
               ? "primary"
-              : "sndarkshades"
+              : undefined
           }
           variant="ghost"
           fontWeight="bold"
@@ -30,7 +30,7 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
         <Button
           leftIcon={<StarIcon />}
           color={
-            router.pathname.includes("/flip-coin") ? "primary" : "sndarkshades"
+            router.pathname.includes("/flip-coin") ? "primary" : undefined
           }
           mt={4}
           variant="ghost"

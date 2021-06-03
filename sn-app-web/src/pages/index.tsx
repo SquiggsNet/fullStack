@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/react";
+import { Button, Center, Divider } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 import { EditDeletePostButtons } from "../components/EditDeletePostButtons";
@@ -23,7 +23,7 @@ const Index = () => {
   if (!loading && !data) {
     // TODO: improve later
     return (
-      <Layout color="snlightshades">
+      <Layout>
         <div>
           <div>{error?.message}</div>
         </div>
@@ -45,22 +45,28 @@ const Index = () => {
                   <Stack spacing={8}>
                     {data!.posts.posts.map((p) =>
                       !p ? null : (
-                        <Flex
-                          bg="sndarkaccent"
-                          color="snlightshades"
+                        <Flex 
                           key={p.id}
                           p={5}
                           shadow="md"
                           borderRadius={18}
-                        >
+                        >{/* bg color */}
                           <UpvoteSection post={p} />
+                          <Center>
+                            <Divider
+                              // ml={5}
+                              mr={5}
+                              orientation="vertical"
+                              // devider color
+                            />
+                          </Center>
                           <Box flex={1}>
                             <NextLink href="/post/[id]" as={`/post/${p.id}`}>
                               <Link>
                                 <Heading> {p.title}</Heading>
                               </Link>
                             </NextLink>
-                            <Text color="snmain">
+                            <Text color="primary">
                               Posted by {p.creator.username}
                             </Text>
                             <Flex align="center">

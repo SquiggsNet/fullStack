@@ -51,7 +51,8 @@ export const Login: React.FC = ({}) => {
   return (
     <Layout>
       <Wrapper variant="small">
-        <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Formik initialValues={initialValues} onSubmit={submitForm}>
             {({ isSubmitting }) => (
               <Form>
@@ -80,7 +81,6 @@ export const Login: React.FC = ({}) => {
                     ml="auto"
                     type="submit"
                     bg="primary"
-                    color="snlightshades"
                     isLoading={isSubmitting}
                   >
                     login

@@ -16,27 +16,26 @@ export const GameSummary: React.FC<Props> = ({
   lastRuns,
 }) => {
   return (
-    <Box borderRadius={18} p={4} bg="sndarkaccent">
-      <Flex justifyContent="space-between" color="snlightaccent">
-        User:
+    // bg color
+    <Box borderRadius={18} p={4}>
+      <Flex justifyContent="space-between">
+        <Text color="snlightaccent">User:</Text>
         <Text color="snmain">{username}</Text>
       </Flex>
-      <Flex justifyContent="space-between" color="snlightaccent">
-        Current Run:
-        <Text color="snlightshades">{currentRun}</Text>
+      <Flex justifyContent="space-between">
+        <Text color="snlightaccent">Current Run:</Text>
+        <Text>{currentRun}</Text>
       </Flex>
-      <Flex justifyContent="space-between" color="snlightaccent">
-        Best Run:
-        <Text color="snlightshades">{bestRun}</Text>
+      <Flex justifyContent="space-between">
+        <Text color="snlightaccent">Best Run:</Text>
+        <Text>{bestRun}</Text>
       </Flex>
-      <Divider mt={5} mb={5} color="snlightaccent" />
+      <Divider mt={5} mb={5} />
       <Flex color="snlightaccent">Last 5 Runs:</Flex>
-      <Flex justifyContent="space-between" color="snlightaccent">
+      <Flex justifyContent="space-between">
         {lastRuns &&
           lastRuns.map((run, index) => (
-            <Text key={`${run}-${index}`} color="snlightshades">
-              {run}
-            </Text>
+            <Text key={`${run}-${index}`}>{run}</Text>
           ))}
       </Flex>
     </Box>

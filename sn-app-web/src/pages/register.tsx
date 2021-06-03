@@ -77,7 +77,8 @@ export const Register: React.FC = ({}) => {
   return (
     <Layout>
       <Wrapper variant="small">
-        <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Formik
             initialValues={initialValues}
             validate={validate}
@@ -128,7 +129,6 @@ export const Register: React.FC = ({}) => {
                     ml="auto"
                     type="submit"
                     bg="primary"
-                    color="snlightshades"
                     isLoading={isSubmitting}
                   >
                     Register

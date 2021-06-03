@@ -81,7 +81,8 @@ if (response.data?.changePassword.errors) {
     <>
       <NavBar />
       <Wrapper variant="small">
-        <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Formik
             initialValues={initialValues}
             validate={validate}
@@ -119,7 +120,6 @@ if (response.data?.changePassword.errors) {
                   mt={4}
                   type="submit"
                   bg="primary"
-                  color="snlightshades"
                   isLoading={isSubmitting}
                 >
                   Change Password

@@ -11,7 +11,7 @@ const Post = ({}) => {
 
   if (loading) {
     return (
-      <Layout color="snlightshades">
+      <Layout>
         <Box>loading...</Box>
       </Layout>
     );
@@ -19,7 +19,7 @@ const Post = ({}) => {
 
   if (!data?.post) {
     return (
-      <Layout color="snlightshades">
+      <Layout>
         <Box>loading...</Box>
       </Layout>
     );
@@ -28,7 +28,8 @@ const Post = ({}) => {
   return (
     <Layout>
       <Wrapper variant="medium">
-        <Box  bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Heading mb={4}>{data.post.title}</Heading>
           <Box mb={4}>{data.post.text}</Box>
           <EditDeletePostButtons

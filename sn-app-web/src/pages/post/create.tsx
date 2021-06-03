@@ -14,8 +14,9 @@ export const CreatePost: React.FC<{}> = ({}) => {
   const router = useRouter();
   return (
     <Layout>
-      <Wrapper variant="small" color="snlightshades">
-        <Box  bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+      <Wrapper variant="small">
+        {/* bg color */}
+        <Box borderRadius={18} p={5}>
           <Formik
             initialValues={{ title: "", text: "" }}
             onSubmit={async (values) => {
@@ -41,7 +42,6 @@ export const CreatePost: React.FC<{}> = ({}) => {
                     ml="auto"
                     type="submit"
                     bg="primary"
-                    color="snlightshades"
                     isLoading={isSubmitting}
                   >
                     Create post

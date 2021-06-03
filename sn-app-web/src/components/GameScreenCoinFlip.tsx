@@ -12,14 +12,15 @@ interface Props {
 
 export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip, setCoin, setSelection }) => {
   return (
-    <Box bg="sndarkaccent" color="snlightshades" borderRadius={18} p={5}>
+    // bg color
+    <Box borderRadius={18} p={5}>
       <Flex justifyContent="space-around" alignItems="center">
         <IconButton
           icon={<AtSignIcon boxSize="4em" />}
           aria-label="Heads"
           boxSize="6em"
           borderRadius={50}
-          color={selection === "H" ? "snmain" : "snlightaccent"}
+          color={selection === "H" ? "primary" : undefined}
           onClick={async () => setSelection("H")}
         />
         {coin === "H" ? (
@@ -32,17 +33,13 @@ export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip,
           aria-label="Heads"
           boxSize="6em"
           borderRadius={50}
-          color={selection === "T" ? "snmain" : "snlightaccent"}
+          color={selection === "T" ? "primary" : undefined}
           onClick={async () => setSelection("T")}
         />
       </Flex>
-      <Divider mt={5} mb={5} color="snlightaccent" />
+      <Divider mt={5} mb={5} />
       <Flex justifyContent="space-around">
-        <Button
-          bg="snlightshades"
-          color="sndarkaccent"
-          onClick={async () => setCoin()}
-        >
+        <Button bg="primary" isFullWidth={true} onClick={async () => setCoin()}>
           Flip
         </Button>
       </Flex>
