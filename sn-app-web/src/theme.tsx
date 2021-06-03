@@ -1,5 +1,5 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
-import { createBreakpoints, mode } from '@chakra-ui/theme-tools'
+import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const fonts = {
   color: "#111331",
