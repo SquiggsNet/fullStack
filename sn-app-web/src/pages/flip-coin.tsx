@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 import React, { useState } from 'react'
-import { GameHighScores } from '../components/GameHighScores';
-import { GameScreenCoinFlip } from '../components/GameScreenCoinFlip';
-import { GameSummary } from '../components/GameSummary';
+import { GameHighScores } from '../components/games/GameHighScores';
+import { GameScreenCoinFlip } from "../components/games/screens/GameScreenCoinFlip";
+import { GameSummary } from "../components/games/GameSummary";
 import { Layout } from '../components/Layout';
 import { Wrapper } from '../components/Wrapper';
 import { MeDocument, MeQuery, useFlipHighScoreMutation, useFlipHighScoresQuery, useMeQuery } from '../generated/graphql';
