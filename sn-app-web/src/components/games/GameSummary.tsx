@@ -24,21 +24,21 @@ export const GameSummary: React.FC<Props> = ({
       p={4}
     >
       <Flex justifyContent="space-between">
-        <Text color="snlightaccent">User:</Text>
-        <Text color="snmain">{username}</Text>
+        <Text color="lightaccent">User:</Text>
+        <Text color="primary">{username}</Text>
       </Flex>
       <Flex justifyContent="space-between">
-        <Text color="snlightaccent">Current Run:</Text>
+        <Text color="lightaccent">Current Run:</Text>
         <Text color={lastFlip ? "success" : "danger"}>{currentRun}</Text>
       </Flex>
       <Flex justifyContent="space-between">
-        <Text color="snlightaccent">Best Run:</Text>
+        <Text color="lightaccent">Best Run:</Text>
         <Text color="warning">
           {bestRun || bestRun === 0 ? bestRun : username}
         </Text>
       </Flex>
       <Divider mt={5} mb={5} />
-      <Flex color="snlightaccent">Last 5 Flips:</Flex>
+      <Flex color="lightaccent">Last 5 Flips:</Flex>
       <Flex justifyContent="space-between">
         {lastRuns &&
           lastRuns.map((run, index) => (

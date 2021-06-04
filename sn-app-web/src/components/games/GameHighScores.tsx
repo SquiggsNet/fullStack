@@ -18,7 +18,7 @@ export const GameHighScores: React.FC<Props> = ({ highScores }) => {
       borderRadius={18}
       p={4}
     >
-      <Flex color="snlightaccent">Highscores:</Flex>
+      <Flex color="lightaccent">Highscores:</Flex>
       <Flex flexDir="column">
         {highScores &&
           highScores.map((scoreProfile, index) => (

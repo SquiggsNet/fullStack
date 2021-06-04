@@ -24,30 +24,16 @@ const theme = extendTheme({
     black: "#191919",
     white: "#ffffff",
 
-    // snlightshades: "#FAFBFA",
-    // snlightaccent: "#A5A5A8",
-    // snmain: "#DDA06E",
-    // sndarkaccent: "#B18A7C",
-    // sndarkshades: "#62908B",
-    // primary: "#DDA06E",
+    lightshades: "#FAFBFB",
+    lightaccent: "#E3E3ED",
+    lightprimary: "#5DB65E",
+    primary: "#4D1C88",
+    darkprimary: "#5DB65E",
+    darkaccent: "#171721",
+    darkshades: "#242328",
 
-    snlightshades: "#F4F6F5",
-    snlightaccent: "#8FA494",
-    snmain: "#5DB65E",
-    sndarkaccent: "#7E756C",
-    sndarkshades: "#262327",
-    primary: "#5DB65E",
-    secondary: "#999999",
-
-    cardlight: "#8FA494",
-    carddark: "#7E756C",
-
-    // snlightshades: "#F9FAF6",
-    // snlightaccent: "#4499D8",
-    // snmain: "#6C4B8C",
-    // sndarkaccent: "#4483B8",
-    // sndarkshades: "#111331",
-    // primary: "#6c4b8c",
+    cardlight: "#E3E3ED",
+    carddark: "#171721",
 
     Info: "#262327",
     success: "#51b154",
@@ -57,9 +43,9 @@ const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       body: {
-        color: props.colorMode === "dark" ? "snlightshades" : "sndarkshades",
+        color: props.colorMode === "dark" ? "lightshades" : "darkshades",
         backgroundColor:
-          props.colorMode === "dark" ? "sndarkshades" : "snlightshades",
+          props.colorMode === "dark" ? "darkshades" : "lightshades",
       },
     }),
   },
