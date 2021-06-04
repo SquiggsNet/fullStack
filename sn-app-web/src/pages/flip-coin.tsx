@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Stack } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { GameHighScores } from '../components/games/GameHighScores';
 import { GameScreenCoinFlip } from "../components/games/screens/GameScreenCoinFlip";
@@ -85,20 +85,22 @@ export const FlipCoin: React.FC = ({}) => {
         </Wrapper>
       </Flex>
       <Flex direction="column" p={4} minW={250} maxW={400}>
-        <GameSummary
-          username={data?.me?.username ? data.me.username : "Log in To Track"}
-          bestRun={data?.me?.scoreFlip}
-          lastFlip={lastFlip}
-          currentRun={currentRun}
-          lastRuns={lastTenRuns}
-        />
-        <GameHighScores
-          highScores={
-            highScores?.flipHighScores.scores
-              ? highScores?.flipHighScores.scores
-              : []
-          }
-        />
+        <Stack spacing={8}>
+          <GameSummary
+            username={data?.me?.username ? data.me.username : "Log in To Track"}
+            bestRun={data?.me?.scoreFlip}
+            lastFlip={lastFlip}
+            currentRun={currentRun}
+            lastRuns={lastTenRuns}
+          />
+          <GameHighScores
+            highScores={
+              highScores?.flipHighScores.scores
+                ? highScores?.flipHighScores.scores
+                : []
+            }
+          />
+        </Stack>
       </Flex>
     </Layout>
   );

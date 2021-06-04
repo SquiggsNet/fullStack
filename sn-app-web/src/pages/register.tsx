@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link, useColorModeValue } from "@chakra-ui/react";
 import { Form, Formik, FormikHelpers } from "formik";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -77,8 +77,11 @@ export const Register: React.FC = ({}) => {
   return (
     <Layout>
       <Wrapper variant="small">
-        {/* bg color */}
-        <Box borderRadius={18} p={5}>
+        <Box
+          bg={useColorModeValue("cardlight", "carddark")}
+          borderRadius={18}
+          p={5}
+        >
           <Formik
             initialValues={initialValues}
             validate={validate}

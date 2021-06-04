@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/layout";
-import { Button, Center, Divider } from "@chakra-ui/react";
+import { Button, Center, Divider, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 import { EditDeletePostButtons } from "../components/EditDeletePostButtons";
@@ -45,12 +45,13 @@ const Index = () => {
                   <Stack spacing={8}>
                     {data!.posts.posts.map((p) =>
                       !p ? null : (
-                        <Flex 
+                        <Flex
                           key={p.id}
                           p={5}
+                          bg={useColorModeValue("cardlight", "carddark")}
                           shadow="md"
                           borderRadius={18}
-                        >{/* bg color */}
+                        >
                           <UpvoteSection post={p} />
                           <Center>
                             <Divider

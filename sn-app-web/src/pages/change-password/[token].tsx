@@ -1,4 +1,4 @@
-import { Box, Button, Link } from "@chakra-ui/react";
+import { Box, Button, Link, useColorModeValue } from "@chakra-ui/react";
 import { Form, Formik, FormikHelpers } from "formik";
 import { NextPage } from "next";
 import NextLink from "next/link";
@@ -81,8 +81,11 @@ if (response.data?.changePassword.errors) {
     <>
       <NavBar />
       <Wrapper variant="small">
-        {/* bg color */}
-        <Box borderRadius={18} p={5}>
+        <Box
+          bg={useColorModeValue("cardlight", "carddark")}
+          borderRadius={18}
+          p={5}
+        >
           <Formik
             initialValues={initialValues}
             validate={validate}

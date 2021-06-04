@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -15,8 +15,11 @@ export const CreatePost: React.FC<{}> = ({}) => {
   return (
     <Layout>
       <Wrapper variant="small">
-        {/* bg color */}
-        <Box borderRadius={18} p={5}>
+        <Box
+          bg={useColorModeValue("cardlight", "carddark")}
+          borderRadius={18}
+          p={5}
+        >
           <Formik
             initialValues={{ title: "", text: "" }}
             onSubmit={async (values) => {

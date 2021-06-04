@@ -1,5 +1,5 @@
 import { AtSignIcon, LinkIcon } from '@chakra-ui/icons';
-import { Box, Button, Divider, Flex, IconButton } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 
 interface Props {
@@ -12,8 +12,11 @@ interface Props {
 
 export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip, setCoin, setSelection }) => {
   return (
-    // bg color
-    <Box borderRadius={18} p={5}>
+    <Box
+      bg={useColorModeValue("cardlight", "carddark")}
+      borderRadius={18}
+      p={5}
+    >
       <Flex justifyContent="space-around" alignItems="center">
         <IconButton
           icon={<AtSignIcon boxSize="4em" />}

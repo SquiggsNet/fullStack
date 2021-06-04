@@ -1,5 +1,5 @@
 import { Box, Text } from "@chakra-ui/layout";
-import { Divider, Flex } from "@chakra-ui/react";
+import { Divider, Flex, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 
 interface Props {
@@ -18,8 +18,11 @@ export const GameSummary: React.FC<Props> = ({
   lastFlip,
 }) => {
   return (
-    // bg color
-    <Box borderRadius={18} p={4}>
+    <Box
+      bg={useColorModeValue("cardlight", "carddark")}
+      borderRadius={18}
+      p={4}
+    >
       <Flex justifyContent="space-between">
         <Text color="snlightaccent">User:</Text>
         <Text color="snmain">{username}</Text>

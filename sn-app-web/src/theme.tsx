@@ -39,6 +39,9 @@ const theme = extendTheme({
     primary: "#5DB65E",
     secondary: "#999999",
 
+    cardlight: "#8FA494",
+    carddark: "#7E756C",
+
     // snlightshades: "#F9FAF6",
     // snlightaccent: "#4499D8",
     // snmain: "#6C4B8C",
@@ -54,8 +57,7 @@ const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       body: {
-        color:
-          props.colorMode === "dark" ? "snlightshades" : "sndarkshades",
+        color: props.colorMode === "dark" ? "snlightshades" : "sndarkshades",
         backgroundColor:
           props.colorMode === "dark" ? "sndarkshades" : "snlightshades",
       },
