@@ -111,7 +111,7 @@ const Index = () => {
             </Box>
           </Wrapper>
         </Flex>
-        {meData && !loading ? <SideBarRight /> : <></>}
+        {meData && !meLoading ? <SideBarRight /> : <></>}
       </Layout>
     </>
   );
