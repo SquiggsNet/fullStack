@@ -7,11 +7,12 @@ import { Layout } from "../components/Layout";
 import { SideBarRight } from "../components/SideBarRight";
 import { UpvoteSection } from "../components/UpvoteSection";
 import { Wrapper } from "../components/Wrapper";
-import { usePostsQuery } from "../generated/graphql";
+import { useMeQuery, usePostsQuery } from "../generated/graphql";
 import { truncate } from "../utils/trancate";
 import { withApollo } from "../utils/withApollo";
 
 const Index = () => {
+  const { data: meData, loading: meLoading } = useMeQuery();
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
     variables: {
       limit: 15,
@@ -110,7 +111,7 @@ const Index = () => {
             </Box>
           </Wrapper>
         </Flex>
-        <SideBarRight />
+        {meData && !loading ? <SideBarRight /> : <></>}
       </Layout>
     </>
   );
