@@ -51,9 +51,9 @@ export const GameSummary: React.FC<Props> = ({
           lastRuns.map((run, index) => (
             <Box key={`${run}-${index}`}>
               {run === "H" ? (
-                <IoHappy />
+                <IoHappy fontSize={30}/>
               ) : run === "T" ? (
-                <IoLeaf />
+                <IoLeaf fontSize={30}/>
               ) : (
                 <Text>{run}</Text>
               )}
