@@ -65,10 +65,8 @@ const Index = () => {
                           <UpvoteSection post={p} />
                           <Center>
                             <Divider
-                              // ml={5}
                               mr={5}
                               orientation="vertical"
-                              // devider color
                             />
                           </Center>
                           <Box flex={1}>

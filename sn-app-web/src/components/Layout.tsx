@@ -1,5 +1,6 @@
 import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+import { useLeftMenu } from "../utils/useLeftMenu";
 import { NavBar } from "./NavBar";
 import { SideBarLeft } from "./SideBarLeft";
 import { WrapperVariant } from "./Wrapper";
@@ -9,17 +10,22 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { isOpen, toggleIsOpen } = useLeftMenu(true);
   return (
     <Box minH="inherit" position="sticky" m="auto" top={0} maxW={1400}>
-      <NavBar />
+      <NavBar toggleMenuOpen={toggleIsOpen} />
       <Flex h="calc(100vh - 85px)" zIndex={1}>
-        <SideBarLeft />
+        {isOpen ? (
+          <SideBarLeft />
+        ) : (
+          <Box
+            left={0}
+            w={3}
+            bg={useColorModeValue("lightcard", "darkcard")}
+          />
+        )}
         {children}
-        <Box
-          right={0}
-          w={3}
-          bg={useColorModeValue("lightcard", "darkcard")}
-        />
+        <Box right={0} w={3} bg={useColorModeValue("lightcard", "darkcard")} />
       </Flex>
       <Box
         h={3}

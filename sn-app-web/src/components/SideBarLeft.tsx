@@ -13,7 +13,7 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
       bg={useColorModeValue("lightcard", "darkcard")}
       direction="column"
       maxW={300}
-      p={4}
+      pt={4}
     >
       <NextLink href="/">
         <Button
@@ -27,6 +27,10 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
           fontWeight="bold"
           fontSize="xl"
           justifyContent="flex-start"
+          borderLeftColor={useColorModeValue("lightprimary", "darkprimary")}
+          borderLeftWidth={
+            router.pathname === "/" || router.pathname.includes("/post") ? 4 : 0
+          }
         >
           <Text display={{ xs: "none", lg: "block" }}>Posts</Text>
         </Button>
@@ -39,10 +43,12 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
               ? useColorModeValue("lightprimary", "darkprimary")
               : undefined
           }
-          mt={4}
+          mt={2}
           variant="ghost"
           fontSize="xl"
           justifyContent="flex-start"
+          borderLeftColor={useColorModeValue("lightprimary", "darkprimary")}
+          borderLeftWidth={router.pathname.includes("/flip-coin") ? 4 : 0}
         >
           <Text display={{ xs: "none", lg: "block" }}>Flip Coin</Text>
         </Button>

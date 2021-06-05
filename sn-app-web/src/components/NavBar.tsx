@@ -17,11 +17,13 @@ import NextLink from "next/link";
 import { useLogoutMutation, useMeQuery } from "../generated/graphql";
 import { isServer } from "../utils/isServer";
 import { useApolloClient } from "@apollo/client";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 
-interface NavBarProps {}
+interface NavBarProps {
+  toggleMenuOpen: any;
+}
 
-export const NavBar: React.FC<NavBarProps> = ({}) => {
+export const NavBar: React.FC<NavBarProps> = ({ toggleMenuOpen }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [logout, { loading: logoutFecthing }] = useLogoutMutation();
   const router = useRouter();
@@ -70,11 +72,16 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     body = (
       <Flex align="center">
         <Menu>
-          <MenuButton as={Button} fontSize="xl" rightIcon={<ChevronDownIcon />}>
+          <MenuButton
+            as={Button}
+            variant="ghost"
+            fontSize="xl"
+            rightIcon={<ChevronDownIcon />}
+          >
             {data.me.username}
           </MenuButton>
           <Portal>
-            <MenuList>
+            <MenuList bg={useColorModeValue("lightcard", "darkcard")}>
               <MenuItem onClick={toggleColorMode}>
                 Toggle {colorMode === "light" ? "Dark" : "Light"}
               </MenuItem>
@@ -102,11 +109,15 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       top={0}
     >
       <Flex flex={1} align="center" m="auto" p={4} maxW={1400}>
-        {/* <NextLink href="/"> */}
-          <Button variant="gohst" onClick={toggleColorMode} fontSize="xl">
-            theSquiggsNet
-          </Button>
-        {/* </NextLink> */}
+        <Button
+          leftIcon={<HamburgerIcon />}
+          ml={-4}
+          variant="ghost"
+          onClick={toggleMenuOpen}
+          fontSize="xl"
+        >
+          theSquiggsNet
+        </Button>
         <Box ml={"auto"}>{body}</Box>
       </Flex>
     </Flex>
