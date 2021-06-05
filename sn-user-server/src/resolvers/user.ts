@@ -265,8 +265,7 @@ export class UserResolver {
         errors: invalidLoginResponseErrors,
       };
     }
-
-    const valid = argon2.verify(user.password, password);
+    const valid = await argon2.verify(user.password, password);
     if (!valid) {
       return {
         errors: invalidLoginResponseErrors,
