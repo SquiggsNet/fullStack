@@ -20,7 +20,7 @@ import { useApolloClient } from "@apollo/client";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 interface NavBarProps {
-  toggleMenuOpen: any;
+  toggleMenuOpen?: any;
 }
 
 export const NavBar: React.FC<NavBarProps> = ({ toggleMenuOpen }) => {
