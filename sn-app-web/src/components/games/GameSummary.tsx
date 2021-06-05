@@ -1,6 +1,10 @@
 import { Box, Text } from "@chakra-ui/layout";
 import { Divider, Flex, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+import {
+  IoHappy,
+  IoLeaf,
+} from "react-icons/io5";
 
 interface Props {
   username: string;
@@ -42,10 +46,18 @@ export const GameSummary: React.FC<Props> = ({
       </Flex>
       <Divider mt={5} mb={5} />
       <Flex color="lightaccent">Last 5 Flips:</Flex>
-      <Flex justifyContent="space-between">
+      <Flex mt={4} justifyContent="space-between">
         {lastRuns &&
           lastRuns.map((run, index) => (
-            <Text key={`${run}-${index}`}>{run}</Text>
+            <Box key={`${run}-${index}`}>
+              {run === "H" ? (
+                <IoHappy />
+              ) : run === "T" ? (
+                <IoLeaf />
+              ) : (
+                <Text>{run}</Text>
+              )}
+            </Box>
           ))}
       </Flex>
     </Box>

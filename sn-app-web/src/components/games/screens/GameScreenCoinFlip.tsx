@@ -1,6 +1,11 @@
-import { AtSignIcon, LinkIcon } from '@chakra-ui/icons';
 import { Box, Button, Divider, Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+import {
+  IoHappy,
+  IoHappyOutline,
+  IoLeaf,
+  IoLeafOutline,
+} from "react-icons/io5";
 
 interface Props {
   coin: string | null;
@@ -19,9 +24,15 @@ export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip,
     >
       <Flex justifyContent="space-around" alignItems="center">
         <IconButton
-          icon={<AtSignIcon boxSize="4em" />}
+          icon={
+            selection === "H" ? (
+              <IoHappy fontSize={95} />
+            ) : (
+              <IoHappyOutline fontSize={95} />
+            )
+          }
           aria-label="Heads"
-          boxSize={{ xs: "4em", sm: "6em" }}
+          boxSize={{ xs: "4em", sm: "7em" }}
           borderRadius={50}
           color={
             selection === "H"
@@ -30,21 +41,22 @@ export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip,
           }
           onClick={async () => setSelection("H")}
         />
-        {coin === "H" ? (
-          <AtSignIcon
-            boxSize={{ xs: "7em", sm: "15em" }}
-            color={lastFlip ? "success" : "danger"}
-          />
-        ) : (
-          <LinkIcon
-            boxSize={{ xs: "7em", sm: "15em" }}
-            color={lastFlip ? "success" : "danger"}
-          />
-        )}
+        <Box
+          fontSize={{ xs: 125, sm: 250 }}
+          color={lastFlip ? "success" : "danger"}
+        >
+          {coin === "H" ? <IoHappy /> : <IoLeaf />}
+        </Box>
         <IconButton
-          icon={<LinkIcon boxSize="4em" />}
+          icon={
+            selection === "T" ? (
+              <IoLeaf fontSize={90} />
+            ) : (
+              <IoLeafOutline fontSize={90} />
+            )
+          }
           aria-label="Heads"
-          boxSize={{ xs: "4em", sm: "6em" }}
+          boxSize={{ xs: "3em", sm: "7em" }}
           borderRadius={50}
           color={
             selection === "T"
