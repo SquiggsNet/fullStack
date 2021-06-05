@@ -19,13 +19,16 @@ export const GameSummary: React.FC<Props> = ({
 }) => {
   return (
     <Box
-      bg={useColorModeValue("cardlight", "carddark")}
+      bg={useColorModeValue("lightcard", "darkcard")}
       borderRadius={18}
       p={4}
+      w="full"
     >
       <Flex justifyContent="space-between">
         <Text color="lightaccent">User:</Text>
-        <Text color="primary">{username}</Text>
+        <Text color={useColorModeValue("lightprimary", "darkprimary")}>
+          {username}
+        </Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text color="lightaccent">Current Run:</Text>

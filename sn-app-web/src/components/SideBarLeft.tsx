@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -9,13 +9,18 @@ interface SideBarLeftProps {}
 export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
   const router = useRouter();
   return (
-    <Flex direction="column" maxW={300} p={4}>
+    <Flex
+      bg={useColorModeValue("lightcard", "darkcard")}
+      direction="column"
+      maxW={300}
+      p={4}
+    >
       <NextLink href="/">
         <Button
           leftIcon={<ChatIcon />}
           color={
             router.pathname === "/" || router.pathname.includes("/post")
-              ? "primary"
+              ? useColorModeValue("lightprimary", "darkprimary")
               : undefined
           }
           variant="ghost"
@@ -23,21 +28,23 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
           fontSize="xl"
           justifyContent="flex-start"
         >
-          Posts
+          <Text display={{ xs: "none", lg: "block" }}>Posts</Text>
         </Button>
       </NextLink>
       <NextLink href="/flip-coin">
         <Button
           leftIcon={<StarIcon />}
           color={
-            router.pathname.includes("/flip-coin") ? "primary" : undefined
+            router.pathname.includes("/flip-coin")
+              ? useColorModeValue("lightprimary", "darkprimary")
+              : undefined
           }
           mt={4}
           variant="ghost"
           fontSize="xl"
           justifyContent="flex-start"
         >
-          Flip Coin
+          <Text display={{ xs: "none", lg: "block" }}>Flip Coin</Text>
         </Button>
       </NextLink>
     </Flex>

@@ -30,7 +30,7 @@ const Post = ({}) => {
     <Layout>
       <Wrapper variant="medium">
         <Box
-          bg={useColorModeValue("cardlight", "carddark")}
+          bg={useColorModeValue("lightcard", "darkcard")}
           borderRadius={18}
           p={5}
         >

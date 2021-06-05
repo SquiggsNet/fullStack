@@ -1,4 +1,4 @@
-import { Flex, Stack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { GameHighScores } from '../components/games/GameHighScores';
 import { GameScreenCoinFlip } from "../components/games/screens/GameScreenCoinFlip";
@@ -71,36 +71,49 @@ export const FlipCoin: React.FC = ({}) => {
     setSelection(text);
   };
 
+  const AdditionlInfo = (
+    <Flex
+      direction={{ xs: "column", sm: "row", lg: "column" }}
+      p={{ xs: 0, lg: 8 }}
+      pl={{ xs: 0, lg: 0 }}
+      pt={{ xs: 8, lg: 8 }}
+      minW={300}
+    >
+      <GameSummary
+        username={data?.me?.username ? data.me.username : "Log in To Track"}
+        bestRun={data?.me?.scoreFlip}
+        lastFlip={lastFlip}
+        currentRun={currentRun}
+        lastRuns={lastTenRuns}
+      />
+      <Box pl={{ xs: 0, sm: 8, lg: 0 }} mt={{ xs: 4, sm: 0, lg: 4 }} w="full">
+        <GameHighScores
+          highScores={
+            highScores?.flipHighScores.scores
+              ? highScores?.flipHighScores.scores
+              : []
+          }
+        />
+      </Box>
+    </Flex>
+  );
+
   return (
     <Layout>
-      <Flex direction="column" top={0} grow={1}>
-        <Wrapper>
-          <GameScreenCoinFlip
-            coin={coin}
-            selection={selection}
-            lastFlip={lastFlip}
-            setCoin={handleCoinSet}
-            setSelection={handleSelectionSet}
-          />
-        </Wrapper>
-      </Flex>
-      <Flex direction="column" p={4} minW={250} maxW={400}>
-        <Stack spacing={8}>
-          <GameSummary
-            username={data?.me?.username ? data.me.username : "Log in To Track"}
-            bestRun={data?.me?.scoreFlip}
-            lastFlip={lastFlip}
-            currentRun={currentRun}
-            lastRuns={lastTenRuns}
-          />
-          <GameHighScores
-            highScores={
-              highScores?.flipHighScores.scores
-                ? highScores?.flipHighScores.scores
-                : []
-            }
-          />
-        </Stack>
+      <Flex direction={{ xs: "column", lg: "row" }} top={0} grow={1}>
+        <Flex direction="column" top={0} grow={{ xs: 0, lg: 1 }}>
+          <Wrapper>
+            <GameScreenCoinFlip
+              coin={coin}
+              selection={selection}
+              lastFlip={lastFlip}
+              setCoin={handleCoinSet}
+              setSelection={handleSelectionSet}
+            />
+            <Box display={{ xs: "block", lg: "none" }}>{AdditionlInfo}</Box>
+          </Wrapper>
+        </Flex>
+        <Box display={{ xs: "none", lg: "block" }}>{AdditionlInfo}</Box>
       </Flex>
     </Layout>
   );

@@ -14,9 +14,10 @@ interface Props {
 export const GameHighScores: React.FC<Props> = ({ highScores }) => {
   return (
     <Box
-      bg={useColorModeValue("cardlight", "carddark")}
+      bg={useColorModeValue("lightcard", "darkcard")}
       borderRadius={18}
       p={4}
+      w="full"
     >
       <Flex color="lightaccent">Highscores:</Flex>
       <Flex flexDir="column">

@@ -34,9 +34,18 @@ const Index = () => {
   return (
     <>
       <Layout>
-        <Flex direction="column" top={0} grow={1}>
+        <Flex
+          direction="column"
+          overflow="auto"
+          css={{
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+          grow={1}
+        >
           <Wrapper variant="medium">
-            <Box pb={12} overflow="auto">
+            <Box pb={8} overflow="auto">
               {!data && loading ? (
                 <>
                   <div>loading...</div>
@@ -49,7 +58,7 @@ const Index = () => {
                         <Flex
                           key={p.id}
                           p={5}
-                          bg={useColorModeValue("cardlight", "carddark")}
+                          bg={useColorModeValue("lightcard", "darkcard")}
                           shadow="md"
                           borderRadius={18}
                         >
@@ -68,7 +77,12 @@ const Index = () => {
                                 <Heading> {p.title}</Heading>
                               </Link>
                             </NextLink>
-                            <Text color="primary">
+                            <Text
+                              color={useColorModeValue(
+                                "lightprimary",
+                                "darkprimary"
+                              )}
+                            >
                               Posted by {p.creator.username}
                             </Text>
                             <Flex align="center">

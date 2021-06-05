@@ -7,6 +7,7 @@ const fonts = {
 };
 
 const breakpoints = createBreakpoints({
+  xs: '20em',
   sm: '40em',
   md: '52em',
   lg: '64em',
@@ -24,21 +25,23 @@ const theme = extendTheme({
     black: "#191919",
     white: "#ffffff",
 
-    lightshades: "#FAFBFB",
-    lightaccent: "#E3E3ED",
-    lightprimary: "#5DB65E",
-    primary: "#4D1C88",
-    darkprimary: "#5DB65E",
-    darkaccent: "#171721",
-    darkshades: "#242328",
+    lightshades: "#C5C6C7",
+    // lightaccent: "#E3E3ED",
+    lightprimary: "#45A29E",
 
-    cardlight: "#E3E3ED",
-    carddark: "#171721",
+    primary: "#66FCF1",
+
+    darkprimary: "#66FCF1",
+    // darkaccent: "#171721",
+    darkshades: "#1E1E1E",
+
+    lightcard: "#E3E3ED",
+    darkcard: "#171717",
 
     Info: "#262327",
-    success: "#51b154",
-    warning: "#cea11c",
-    danger: "#f44336",
+    success: "#18D42C",
+    warning: "#F4B81B",
+    danger: "#C91818",
   },
   styles: {
     global: (props: any) => ({

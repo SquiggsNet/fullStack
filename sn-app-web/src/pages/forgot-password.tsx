@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { InputField } from "../components/InputField";
@@ -41,7 +41,8 @@ export const ForgotPassword: React.FC = ({}) => {
                   <Button
                     mt={4}
                     type="submit"
-                    bg="primary"
+                    bg={useColorModeValue("lightprimary", "darkprimary")}
+                    color={useColorModeValue("lightshades", "darkshades")}
                     isLoading={isSubmitting}
                   >
                     Get Password Reset Email

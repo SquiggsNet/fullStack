@@ -78,7 +78,7 @@ export const Register: React.FC = ({}) => {
     <Layout>
       <Wrapper variant="small">
         <Box
-          bg={useColorModeValue("cardlight", "carddark")}
+          bg={useColorModeValue("lightcard", "darkcard")}
           borderRadius={18}
           p={5}
         >
@@ -131,7 +131,8 @@ export const Register: React.FC = ({}) => {
                   <Button
                     ml="auto"
                     type="submit"
-                    bg="primary"
+                    bg={useColorModeValue("lightprimary", "darkprimary")}
+                    color={useColorModeValue("lightshades", "darkshades")}
                     isLoading={isSubmitting}
                   >
                     Register

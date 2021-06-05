@@ -1,4 +1,16 @@
-import { Box, Button, Flex, Link, Menu, MenuButton, MenuItem, MenuList, Portal, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Portal,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -25,7 +37,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       <>
         <NextLink href="/login">
           <Button
-            color={router.pathname.includes("/login") ? "primary" : undefined}
+            color={
+              router.pathname.includes("/login")
+                ? useColorModeValue("lightprimary", "darkprimary")
+                : undefined
+            }
             variant="link"
             fontSize="xl"
             as={Link}
@@ -37,7 +53,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         <NextLink href="/register">
           <Button
             color={
-              router.pathname.includes("/register") ? "primary" : undefined
+              router.pathname.includes("/register")
+                ? useColorModeValue("lightprimary", "darkprimary")
+                : undefined
             }
             variant="link"
             fontSize="xl"
@@ -76,13 +94,19 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex zIndex={1} position="sticky" top={0}>
+    <Flex
+      borderTopRadius={25}
+      bg={useColorModeValue("lightcard", "darkcard")}
+      zIndex={1}
+      position="sticky"
+      top={0}
+    >
       <Flex flex={1} align="center" m="auto" p={4} maxW={1400}>
-        <NextLink href="/">
-          <Button variant="gohst" fontSize="xl">
+        {/* <NextLink href="/"> */}
+          <Button variant="gohst" onClick={toggleColorMode} fontSize="xl">
             theSquiggsNet
           </Button>
-        </NextLink>
+        {/* </NextLink> */}
         <Box ml={"auto"}>{body}</Box>
       </Flex>
     </Flex>

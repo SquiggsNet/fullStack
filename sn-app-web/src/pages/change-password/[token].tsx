@@ -82,7 +82,7 @@ if (response.data?.changePassword.errors) {
       <NavBar />
       <Wrapper variant="small">
         <Box
-          bg={useColorModeValue("cardlight", "carddark")}
+          bg={useColorModeValue("lightcard", "darkcard")}
           borderRadius={18}
           p={5}
         >
@@ -122,7 +122,8 @@ if (response.data?.changePassword.errors) {
                 <Button
                   mt={4}
                   type="submit"
-                  bg="primary"
+                  bg={useColorModeValue("lightprimary", "darkprimary")}
+                  color={useColorModeValue("lightshades", "darkshades")}
                   isLoading={isSubmitting}
                 >
                   Change Password

@@ -13,7 +13,7 @@ interface Props {
 export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip, setCoin, setSelection }) => {
   return (
     <Box
-      bg={useColorModeValue("cardlight", "carddark")}
+      bg={useColorModeValue("lightcard", "darkcard")}
       borderRadius={18}
       p={5}
     >
@@ -21,29 +21,44 @@ export const GameScreenCoinFlip: React.FC<Props> = ({ coin, selection, lastFlip,
         <IconButton
           icon={<AtSignIcon boxSize="4em" />}
           aria-label="Heads"
-          boxSize="6em"
+          boxSize={{ xs: "4em", sm: "6em" }}
           borderRadius={50}
-          color={selection === "H" ? "primary" : undefined}
+          color={
+            selection === "H"
+              ? useColorModeValue("lightprimary", "darkprimary")
+              : undefined
+          }
           onClick={async () => setSelection("H")}
         />
         {coin === "H" ? (
-          <AtSignIcon boxSize="15em" color={lastFlip ? "success" : "danger"} />
+          <AtSignIcon
+            boxSize={{ xs: "7em", sm: "15em" }}
+            color={lastFlip ? "success" : "danger"}
+          />
         ) : (
-          <LinkIcon boxSize="15em" color={lastFlip ? "success" : "danger"} />
+          <LinkIcon
+            boxSize={{ xs: "7em", sm: "15em" }}
+            color={lastFlip ? "success" : "danger"}
+          />
         )}
         <IconButton
           icon={<LinkIcon boxSize="4em" />}
           aria-label="Heads"
-          boxSize="6em"
+          boxSize={{ xs: "4em", sm: "6em" }}
           borderRadius={50}
-          color={selection === "T" ? "primary" : undefined}
+          color={
+            selection === "T"
+              ? useColorModeValue("lightprimary", "darkprimary")
+              : undefined
+          }
           onClick={async () => setSelection("T")}
         />
       </Flex>
       <Divider mt={5} mb={5} />
       <Flex justifyContent="space-around">
         <Button
-          bg="primary"
+          bg={useColorModeValue("lightprimary", "darkprimary")}
+          color={useColorModeValue("lightshades", "darkshades")}
           disabled={!selection}
           isFullWidth={true}
           onClick={async () => setCoin()}
