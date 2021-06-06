@@ -1,0 +1,3 @@
+mutation DeleteFinanceProfile($id: Int!) {
+  deleteFinanceProfile(id: $id)
+}

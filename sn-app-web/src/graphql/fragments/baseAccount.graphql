@@ -1,0 +1,8 @@
+fragment BaseAccount on Account {
+  id
+  name
+  description
+  balance
+  balanceDate
+  isCredit
+}

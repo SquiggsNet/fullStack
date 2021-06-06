@@ -1,0 +1,19 @@
+mutation UpdateAccount(
+  $id: Int!
+  $name: String!
+  $description: String
+  $balance: Float!
+  $balanceDate: DateTime!
+  $isCredit: Boolean
+) {
+  updateAccount(
+    id: $id
+    name: $name
+    description: $description
+    balance: $balance
+    balanceDate: $balanceDate
+    isCredit: $isCredit
+  ) {
+    ...BaseAccount
+  }
+}
