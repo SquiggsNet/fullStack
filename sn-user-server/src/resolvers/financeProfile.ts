@@ -1,4 +1,3 @@
-import { User } from "../entities/User";
 import { 
   Arg,
   Ctx,
@@ -33,14 +32,6 @@ export const getProfileByUserId = async (userId: number) => {
 
 @Resolver(FinanceProfile)
 export class FinanceProfileResolver {
-  @FieldResolver(() => User)
-  user(
-    @Root() finacialProfile: FinanceProfile,
-    @Ctx() { userLoader }: MyContext
-  ) {
-    return userLoader.load(finacialProfile.userId);
-  }
-
   @FieldResolver(() => [Account], { nullable: true })
   async accounts(
     @Root() financeProfile: FinanceProfile,
