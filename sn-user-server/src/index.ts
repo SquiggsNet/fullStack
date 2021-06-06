@@ -5,11 +5,17 @@ import { createConnection } from "typeorm";
 import { Post } from "./entities/Post";
 import { Upvote } from "./entities/Upvote";
 import { User } from "./entities/User";
+import { FinanceProfile } from "./entities/FinanceProfile";
+import { Account } from "./entities/Account";
+import { Expense } from "./entities/Expense";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { HelloResolver } from "./resolvers/hello";
 import { PostResolver } from "./resolvers/post";
 import { UserResolver } from "./resolvers/user";
+import { FinanceProfileResolver } from "./resolvers/financeProfile";
+import { AccountResolver } from "./resolvers/account";
+import { ExpenseResolver } from "./resolvers/expense";
 import { createUpvoteLoader } from "./utils/createUpvoteLoader";
 import { createUserLoader } from "./utils/createUserLoader";
 import Redis from "ioredis";
@@ -17,6 +23,8 @@ import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from "cors";
 import { COOKIE_NAME, __prod__ } from "./constants";
+import { createAccountLoader } from "./utils/createAccountLoader";
+import { createExpenseLoader } from "./utils/createExpenseLoader";
 
 const main = async () => {
   const { DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST } =
@@ -34,7 +42,7 @@ const main = async () => {
         password: DB_PASSWORD,
         synchronize: true,
         logging: true,
-        entities: [Post, Upvote, User],
+        entities: [Post, Upvote, User, FinanceProfile, Account, Expense],
       });
       break;
     } catch (error) {
@@ -91,7 +99,14 @@ const main = async () => {
   // Graphql endpoint
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, PostResolver, UserResolver],
+      resolvers: [
+        HelloResolver,
+        PostResolver,
+        UserResolver,
+        FinanceProfileResolver,
+        AccountResolver,
+        ExpenseResolver,
+      ],
       validate: false,
     }),
     context: ({ req, res }) => ({
@@ -100,6 +115,8 @@ const main = async () => {
       redis,
       userLoader: createUserLoader(),
       upvoteLoader: createUpvoteLoader(),
+      accountLoader: createAccountLoader(),
+      expenseLoader: createExpenseLoader(),
     }),
   });
 

@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { FinanceProfile } from "./FinanceProfile";
 import { Post } from "./Post";
 import { Upvote } from "./Upvote";
 
@@ -35,6 +36,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Post, (post) => post.creator)
   posts: Post[];
+
+  @OneToMany(() => FinanceProfile, (financialProfile) => financialProfile.user)
+  financialProfiles: FinanceProfile[];
 
   @Field(() => [Upvote])
   @OneToMany(() => Upvote, (upvote) => upvote.user)
