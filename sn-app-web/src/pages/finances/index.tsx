@@ -2,7 +2,7 @@ import { Box, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { Layout } from "../../components/Layout";
 import { Wrapper } from "../../components/Wrapper";
-import { Account, Expense, MyFinancesDocument, MyFinancesQuery, useCreateFinanceProfileMutation, useMyFinancesQuery } from "../../generated/graphql"
+import { Account, Expense, useCreateFinanceProfileMutation, useMyFinancesQuery } from "../../generated/graphql"
 import { withApollo } from "../../utils/withApollo";
 import { useIsAuth } from "../../utils/useIsAuth";
 import { Stack } from "@chakra-ui/react";
