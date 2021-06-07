@@ -2,45 +2,41 @@ import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Box, IconButton, Link } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
-import { useDeletePostMutation, useMeQuery } from "../generated/graphql";
+import { useDeleteExpenseMutation } from "../../generated/graphql";
 
-interface EditDeletePostButtonsProps {
+interface EditDeleteExpenseButtonsProps {
   id: number;
-  creatorId: number;
 }
 
-export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({
+export const EditDeleteExpenseButtons: React.FC<EditDeleteExpenseButtonsProps> = ({
   id,
-  creatorId,
 }) => {
-  const [deletePost] = useDeletePostMutation();
-  const { data } = useMeQuery();
-
-  if (data?.me?.id !== creatorId) {
-    return null;
-  }
+  const [deleteExpense] = useDeleteExpenseMutation();
 
   return (
     <Box>
-      <NextLink href="/post/edit/[id]" as={`/post/edit/${id}`}>
+      <NextLink
+        href="/finances/expense/edit/[id]"
+        as={`/finances/expense/edit/${id}`}
+      >
         <IconButton
           as={Link}
-          mr={4}
+          mr={3}
           bg="warning"
-          aria-label="edit post"
+          aria-label="edit expense"
           size="sm"
           icon={<EditIcon />}
         />
       </NextLink>
       <IconButton
         bg="danger"
-        aria-label="delete post"
+        aria-label="delete expense"
         size="sm"
         onClick={() => {
-          deletePost({
+          deleteExpense({
             variables: { id },
             update: (cache) => {
-              cache.evict({ id: "Post:" + id });
+              cache.evict({ id: "Expense:" + id });
             },
           });
         }}

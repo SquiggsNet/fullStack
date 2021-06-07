@@ -16,7 +16,9 @@ interface SideBarLeftProps {}
 export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
   const router = useRouter();
   const currentRoute =
-    router.pathname === "/" || router.pathname.includes("/post")
+    router.pathname === "/"
+      ? "home"
+      : router.pathname.includes("/post")
       ? "post"
       : router.pathname.includes("/flip-coin")
       ? "flip-coin"
@@ -31,7 +33,7 @@ export const SideBarLeft: React.FC<SideBarLeftProps> = () => {
       pt={4}
     >
       <NavButton
-        route="/"
+        route="/post"
         isCurrent={currentRoute === "post"}
         label="Posts"
         icon={

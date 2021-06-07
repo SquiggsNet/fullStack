@@ -90,7 +90,6 @@ export class UserResolver {
     `,
       [realLimit]
     );
-    console.log("dem scores", scores);
     return { scores };
   }
 
