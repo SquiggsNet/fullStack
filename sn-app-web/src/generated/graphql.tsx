@@ -325,6 +325,18 @@ export type BaseExpenseFragment = (
   & Pick<Expense, 'id' | 'name' | 'description' | 'value' | 'frequency'>
 );
 
+export type BaseFinanceProfileFragment = (
+  { __typename?: 'FinanceProfile' }
+  & Pick<FinanceProfile, 'id' | 'userId'>
+  & { accounts?: Maybe<Array<(
+    { __typename?: 'Account' }
+    & BaseAccountFragment
+  )>>, expenses?: Maybe<Array<(
+    { __typename?: 'Expense' }
+    & BaseExpenseFragment
+  )>> }
+);
+
 export type BaseUserFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'username' | 'scoreFlip'>
@@ -388,7 +400,7 @@ export type CreateFinanceProfileMutation = (
   { __typename?: 'Mutation' }
   & { createFinanceProfile: (
     { __typename?: 'FinanceProfile' }
-    & Pick<FinanceProfile, 'id' | 'userId'>
+    & BaseFinanceProfileFragment
   ) }
 );
 
@@ -624,14 +636,7 @@ export type MyFinancesQuery = (
   { __typename?: 'Query' }
   & { myFinances?: Maybe<Array<(
     { __typename?: 'FinanceProfile' }
-    & Pick<FinanceProfile, 'id' | 'userId'>
-    & { accounts?: Maybe<Array<(
-      { __typename?: 'Account' }
-      & BaseAccountFragment
-    )>>, expenses?: Maybe<Array<(
-      { __typename?: 'Expense' }
-      & BaseExpenseFragment
-    )>> }
+    & BaseFinanceProfileFragment
   )>> }
 );
 
@@ -704,6 +709,19 @@ export const BaseExpenseFragmentDoc = gql`
   frequency
 }
     `;
+export const BaseFinanceProfileFragmentDoc = gql`
+    fragment BaseFinanceProfile on FinanceProfile {
+  id
+  userId
+  accounts {
+    ...BaseAccount
+  }
+  expenses {
+    ...BaseExpense
+  }
+}
+    ${BaseAccountFragmentDoc}
+${BaseExpenseFragmentDoc}`;
 export const BaseErrorFragmentDoc = gql`
     fragment BaseError on FieldError {
   field
@@ -831,11 +849,10 @@ export type CreateExpenseMutationOptions = Apollo.BaseMutationOptions<CreateExpe
 export const CreateFinanceProfileDocument = gql`
     mutation CreateFinanceProfile {
   createFinanceProfile {
-    id
-    userId
+    ...BaseFinanceProfile
   }
 }
-    `;
+    ${BaseFinanceProfileFragmentDoc}`;
 export type CreateFinanceProfileMutationFn = Apollo.MutationFunction<CreateFinanceProfileMutation, CreateFinanceProfileMutationVariables>;
 
 /**
@@ -1488,18 +1505,10 @@ export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const MyFinancesDocument = gql`
     query MyFinances {
   myFinances {
-    id
-    userId
-    accounts {
-      ...BaseAccount
-    }
-    expenses {
-      ...BaseExpense
-    }
+    ...BaseFinanceProfile
   }
 }
-    ${BaseAccountFragmentDoc}
-${BaseExpenseFragmentDoc}`;
+    ${BaseFinanceProfileFragmentDoc}`;
 
 /**
  * __useMyFinancesQuery__
