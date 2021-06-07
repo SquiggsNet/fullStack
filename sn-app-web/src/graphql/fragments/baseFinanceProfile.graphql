@@ -1,0 +1,10 @@
+fragment BaseFinanceProfile on FinanceProfile {
+  id
+  userId
+  accounts {
+    ...BaseAccount
+  }
+  expenses {
+    ...BaseExpense
+  }
+}

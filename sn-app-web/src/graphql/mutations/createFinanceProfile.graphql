@@ -1,6 +1,5 @@
 mutation CreateFinanceProfile {
   createFinanceProfile {
-    id
-    userId
+    ...BaseFinanceProfile
   }
 }
