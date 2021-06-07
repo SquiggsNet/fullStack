@@ -1,0 +1,12 @@
+query MyFinances {
+  myFinances {
+    id
+    userId
+    accounts {
+      ...BaseAccount
+    }
+    expenses {
+      ...BaseExpense
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation CreateAccount($options: AccountInput!) {
+  createAccount(options: $options) {
+    ...BaseAccount
+  }
+}

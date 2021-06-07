@@ -1,0 +1,5 @@
+query Expense($id: Int!) {
+  expense(id: $id) {
+    ...BaseExpense
+  }
+}

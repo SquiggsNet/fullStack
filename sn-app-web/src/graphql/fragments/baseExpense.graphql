@@ -1,0 +1,7 @@
+fragment BaseExpense on Expense {
+  id
+  name
+  description
+  value
+  frequency
+}

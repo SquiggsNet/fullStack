@@ -1,0 +1,5 @@
+query Account($id: Int!) {
+  account(id: $id) {
+    ...BaseAccount
+  }
+}

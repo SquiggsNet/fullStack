@@ -1,0 +1,17 @@
+mutation UpdateExpense(
+  $id: Int!
+  $name: String!
+  $description: String
+  $value: Float!
+  $frequency: String!
+) {
+  updateExpense(
+    id: $id
+    name: $name
+    description: $description
+    value: $value
+    frequency: $frequency
+  ) {
+    ...BaseExpense
+  }
+}

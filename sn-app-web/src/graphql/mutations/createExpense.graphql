@@ -1,0 +1,5 @@
+mutation CreateExpense($options: ExpenseInput!) {
+  createExpense(options: $options) {
+    ...BaseExpense
+  }
+}
