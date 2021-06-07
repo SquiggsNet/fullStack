@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  FormLabel,
-  HStack,
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -19,7 +17,6 @@ import { useGetIntId } from "../../../../utils/useGetIntId";
 import { useIsAuth } from "../../../../utils/useIsAuth";
 import { withApollo } from "../../../../utils/withApollo";
 import { Wrapper } from "../../../../components/Wrapper";
-import { RadioCard } from "../../../../components/RadioCard";
 
 export const EditExpense: React.FC<{}> = ({}) => {
   useIsAuth();
